@@ -1,0 +1,9 @@
+[glib]
+pkgname="${pkgprefix}${topdir}"
+name="glib - glib"
+pkgcat="application"
+pkgvendor="http://www.glib.org"
+shortdesc="glib"
+pkgver="$pkgver"
+files(-,root,bin)
+*
