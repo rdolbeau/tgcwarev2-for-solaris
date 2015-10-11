@@ -6,7 +6,7 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=pkg-config
-version=0.20
+version=0.29
 pkgver=1
 source[0]=http://pkgconfig.freedesktop.org/releases/$topdir-$version.tar.gz
 # If there are no patches, simply comment this
@@ -14,6 +14,9 @@ source[0]=http://pkgconfig.freedesktop.org/releases/$topdir-$version.tar.gz
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
+
+export CPPFLAGS="-I$prefix/include"
+export LDFLAGS="-L$prefix/lib -R$prefix/lib"
 
 reg prep
 prep()
