@@ -1,0 +1,9 @@
+[jpeg]
+pkgname="${pkgprefix}${topdir}"
+name="jpeg - jpeg"
+pkgcat="application"
+pkgvendor="http://www.jpeg.org"
+shortdesc="jpeg"
+pkgver="$pkgver"
+files(-,root,bin)
+*

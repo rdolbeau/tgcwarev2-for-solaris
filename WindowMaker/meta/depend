@@ -1,0 +1,6 @@
+TGCWindowMaker TGCpkgcfg auto
+TGCWindowMaker TGClibXft auto
+TGCWindowMaker TGClibpng auto
+TGCWindowMaker TGCjpeg auto
+TGCWindowMaker TGCgiflib auto
+TGCWindowMaker TGClibXpm auto

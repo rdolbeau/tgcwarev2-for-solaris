@@ -1,0 +1,9 @@
+[libpng]
+pkgname="${pkgprefix}${topdir}"
+name="libpng - libpng"
+pkgcat="application"
+pkgvendor="http://www.libpng.org"
+shortdesc="libpng"
+pkgver="$pkgver"
+files(-,root,bin)
+*

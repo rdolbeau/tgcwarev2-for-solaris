@@ -1,0 +1,9 @@
+[giflib]
+pkgname="${pkgprefix}${topdir}"
+name="giflib - giflib"
+pkgcat="application"
+pkgvendor="http://www.giflib.org"
+shortdesc="giflib"
+pkgver="$pkgver"
+files(-,root,bin)
+*

@@ -1,0 +1,9 @@
+[libXft]
+pkgname="${pkgprefix}${topdir}"
+name="libXft - libXft"
+pkgcat="application"
+pkgvendor="xorg"
+shortdesc="libXft"
+pkgver="$pkgver"
+files(-,root,bin)
+*

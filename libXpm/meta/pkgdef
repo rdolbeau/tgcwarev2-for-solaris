@@ -1,0 +1,9 @@
+[libXpm]
+pkgname="${pkgprefix}${topdir}"
+name="libXpm - libXpm"
+pkgcat="application"
+pkgvendor="http://www.libXpm.org"
+shortdesc="libXpm"
+pkgver="$pkgver"
+files(-,root,bin)
+*

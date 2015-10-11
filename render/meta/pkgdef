@@ -1,0 +1,9 @@
+[render]
+pkgname="${pkgprefix}${topdir}"
+name="render - render"
+pkgcat="application"
+pkgvendor="http://www.x.org/"
+shortdesc="render"
+pkgver="$pkgver"
+files(-,root,bin)
+*

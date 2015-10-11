@@ -1,0 +1,9 @@
+[fontconfig]
+pkgname="${pkgprefix}${topdir}"
+name="fontconfig - fontconfig"
+pkgcat="application"
+pkgvendor="xorg"
+shortdesc="fontconfig"
+pkgver="$pkgver"
+files(-,root,bin)
+*

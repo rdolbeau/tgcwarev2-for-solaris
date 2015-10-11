@@ -1,0 +1,11 @@
+--- giflib-5.1.1/util/giftool.c.orig	2014-05-16 11:46:53.000000000 +0100
++++ giflib-5.1.1/util/giftool.c	2015-10-09 16:55:54.820001000 +0100
+@@ -10,8 +10,6 @@
+ #include <fcntl.h>
+ #include <stdbool.h>
+ 
+-#include "getopt.h"
+-#include "getarg.h"
+ #include "gif_lib.h"
+ 
+ #define PROGRAM_NAME	"giftool"

@@ -1,0 +1,9 @@
+[WindowMaker]
+pkgname="${pkgprefix}${topdir}"
+name="WindowMaker - WindowMaker"
+pkgcat="application"
+pkgvendor="http://windowmaker.org/"
+shortdesc="WindowMaker"
+pkgver="$pkgver"
+files(-,root,bin)
+*

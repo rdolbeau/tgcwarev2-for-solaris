@@ -1,0 +1,4 @@
+TGCfontconfig TGCpkgcfg auto
+TGCfontconfig TGCxrender auto
+TGCfontconfig TGCrender auto
+TGCfontconfig TGCfreetype auto

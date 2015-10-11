@@ -1,0 +1,9 @@
+[xrender]
+pkgname="${pkgprefix}${topdir}"
+name="xrender - xrender"
+pkgcat="application"
+pkgvendor="http://www.x.org/"
+shortdesc="xrender"
+pkgver="$pkgver"
+files(-,root,bin)
+*

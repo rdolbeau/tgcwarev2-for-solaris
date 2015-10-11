@@ -1,0 +1,9 @@
+[tiff]
+pkgname="${pkgprefix}${topdir}"
+name="tiff - tiff"
+pkgcat="application"
+pkgvendor="http://www.tiff.org"
+shortdesc="tiff"
+pkgver="$pkgver"
+files(-,root,bin)
+*

@@ -1,0 +1,9 @@
+[freetype]
+pkgname="${pkgprefix}${topdir}"
+name="freetype - freetype"
+pkgcat="application"
+pkgvendor="xorg"
+shortdesc="freetype"
+pkgver="$pkgver"
+files(-,root,bin)
+*
