@@ -15,6 +15,9 @@ source[0]=http://download.savannah.gnu.org/releases/freetype/$topdir-$version.ta
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
 
+export CPPFLAGS="-I$prefix/include"
+export LDFLAGS="-L$prefix/lib -R$prefix/lib"
+
 reg prep
 prep()
 {

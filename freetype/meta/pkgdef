@@ -1,9 +1,9 @@
 [freetype]
 pkgname="${pkgprefix}${topdir}"
-name="freetype - freetype"
+name="freetype - FreeType is a freely available software library to render fonts"
 pkgcat="application"
-pkgvendor="xorg"
-shortdesc="freetype"
+pkgvendor="http://www.freetype.org/"
+shortdesc="FreeType is a freely available software library to render fonts"
 pkgver="$pkgver"
 files(-,root,bin)
 *
