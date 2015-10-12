@@ -1,9 +1,9 @@
 [libXpm]
 pkgname="${pkgprefix}${topdir}"
-name="libXpm - libXpm"
+name="libXpm - XPM (X PixMap) is a format for storing/retrieving X pixmaps to/from files"
 pkgcat="application"
-pkgvendor="http://www.libXpm.org"
-shortdesc="libXpm"
+pkgvendor="http://www.x.org"
+shortdesc="XPM (X PixMap) is a format for storing/retrieving X pixmaps to/from files"
 pkgver="$pkgver"
 files(-,root,bin)
 *
