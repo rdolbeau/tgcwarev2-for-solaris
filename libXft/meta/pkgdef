@@ -1,9 +1,9 @@
 [libXft]
 pkgname="${pkgprefix}${topdir}"
-name="libXft - libXft"
+name="libXft - Xft (2.0) provides a client-side font API for X applications"
 pkgcat="application"
-pkgvendor="xorg"
-shortdesc="libXft"
+pkgvendor="http://www.freedesktop.org/wiki/Software/Xft/"
+shortdesc="Xft (2.0) provides a client-side font API for X applications"
 pkgver="$pkgver"
 files(-,root,bin)
 *

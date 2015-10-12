@@ -16,6 +16,8 @@ source[0]=http://xorg.freedesktop.org/releases/individual/lib/$topdir-$version.t
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
 
 export CFLAGS=-std=c89
+export CPPFLAGS="-I$prefix/include"
+export LDFLAGS="-L$prefix/lib -R$prefix/lib"
 
 reg prep
 prep()
