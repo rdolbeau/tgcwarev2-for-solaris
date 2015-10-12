@@ -1,9 +1,9 @@
 [tiff]
 pkgname="${pkgprefix}${topdir}"
-name="tiff - tiff"
+name="tiff - This software provides support for the Tag Image File Format (TIFF)"
 pkgcat="application"
-pkgvendor="http://www.tiff.org"
-shortdesc="tiff"
+pkgvendor="http://www.libtiff.org/"
+shortdesc="This software provides support for the Tag Image File Format (TIFF)"
 pkgver="$pkgver"
 files(-,root,bin)
 *
