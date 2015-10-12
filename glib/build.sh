@@ -16,7 +16,10 @@ source[0]=http://ftp.gnome.org/pub/gnome/sources/glib/${baseversion}/$topdir-$ve
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
 
-configure_args+=(--with-libiconv-prefix=$prefix --with-libiconv=gnu --with-libintl-prefix=$prefix)
+configure_args+=(--with-libiconv=gnu)
+
+export CPPFLAGS="-I$prefix/include"
+export LDFLAGS="-L$prefix/lib -R$prefix/lib"
 
 reg prep
 prep()

@@ -1,9 +1,9 @@
 [glib]
 pkgname="${pkgprefix}${topdir}"
-name="glib - glib"
+name="glib - GLib provides the core application building blocks for libraries and applications"
 pkgcat="application"
-pkgvendor="http://www.glib.org"
-shortdesc="glib"
+pkgvendor="https://developer.gnome.org/glib/"
+shortdesc="GLib provides the core application building blocks for libraries and applications"
 pkgver="$pkgver"
 files(-,root,bin)
 *
