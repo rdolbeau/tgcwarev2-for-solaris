@@ -1,9 +1,9 @@
 [libpng]
 pkgname="${pkgprefix}${topdir}"
-name="libpng - libpng"
+name="libpng - libpng is the official PNG reference library"
 pkgcat="application"
 pkgvendor="http://www.libpng.org"
-shortdesc="libpng"
+shortdesc="libpng is the official PNG reference library"
 pkgver="$pkgver"
 files(-,root,bin)
 *
