@@ -1,9 +1,9 @@
 [fontconfig]
 pkgname="${pkgprefix}${topdir}"
-name="fontconfig - fontconfig"
+name="fontconfig - Fontconfig is a library for configuring and customizing font access"
 pkgcat="application"
-pkgvendor="xorg"
-shortdesc="fontconfig"
+pkgvendor="http://www.freedesktop.org/wiki/Software/fontconfig/"
+shortdesc="Fontconfig is a library for configuring and customizing font access"
 pkgver="$pkgver"
 files(-,root,bin)
 *
