@@ -15,6 +15,9 @@ source[0]=http://www.ijg.org/files/jpegsrc.v$version.tar.gz
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
 
+export CPPFLAGS="-I$prefix/include"
+export LDFLAGS="-L$prefix/lib -R$prefix/lib"
+
 reg prep
 prep()
 {

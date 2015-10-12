@@ -1,9 +1,9 @@
 [jpeg]
 pkgname="${pkgprefix}${topdir}"
-name="jpeg - jpeg"
+name="jpeg - JPEG (pronounced "jay-peg") is a standardized image compression mechanism"
 pkgcat="application"
-pkgvendor="http://www.jpeg.org"
-shortdesc="jpeg"
+pkgvendor="http://www.ijg.org/"
+shortdesc="JPEG (pronounced "jay-peg") is a standardized image compression mechanism"
 pkgver="$pkgver"
 files(-,root,bin)
 *
