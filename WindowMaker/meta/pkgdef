@@ -1,9 +1,9 @@
 [WindowMaker]
 pkgname="${pkgprefix}${topdir}"
-name="WindowMaker - WindowMaker"
+name="WindowMaker - Window Maker is an X11 window manager originally designed to provide integration support for the GNUstep Desktop Environment"
 pkgcat="application"
 pkgvendor="http://windowmaker.org/"
-shortdesc="WindowMaker"
+shortdesc="Window Maker is an X11 window manager originally designed to provide integration support for the GNUstep Desktop Environment"
 pkgver="$pkgver"
 files(-,root,bin)
 *

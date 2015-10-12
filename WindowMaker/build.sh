@@ -19,6 +19,8 @@ patch[1]=wm092-002
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
 
 export CFLAGS="-D__STDC__=1 -fPIC"
+export CPPFLAGS="-I$prefix/include"
+export LDFLAGS="-L$prefix/lib -R$prefix/lib"
 
 reg prep
 prep()
