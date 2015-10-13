@@ -6,10 +6,13 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=libXpm
-version=3.4g
+version=3.4k
 pkgver=1
 #source[0]=http://xorg.freedesktop.org/releases/individual/lib/${topdir}-${version}.tar.gz
-source[0]=ftp://ftp.x.org/contrib/libraries/libXpm-4.7.tar.gz
+#source[0]=ftp://ftp.x.org/contrib/libraries/libXpm-4.7.tar.gz
+source[0]=ftp://ftp.x.org/contrib/libraries/xpm-${version}.tar.gz
+
+
 # If there are no patches, simply comment this
 #patch[0]=
 
