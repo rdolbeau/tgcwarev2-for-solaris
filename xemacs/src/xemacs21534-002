@@ -1,0 +1,11 @@
+--- xemacs-21.5.34/Makefile.in.in.orig	2013-08-21 18:45:17.000000000 +0100
++++ xemacs-21.5.34/Makefile.in.in	2015-10-12 17:52:31.427278000 +0100
+@@ -407,7 +407,7 @@
+ 	   fi; \
+ 	   ${INSTALL_DATA} lib-src/config.values $(DESTDIR)${docdir}/config.values; \
+ 	   ${INSTALL_DATA} lib-src/DOC $(DESTDIR)${docdir}/DOC; \
+-	   for subdir in `find ${archlibdir} -type d ! -name RCS ! -name SCCS ! -name CVS -print` ; \
++	   for subdir in `find $(DESTDIR)${archlibdir} -type d ! -name RCS ! -name SCCS ! -name CVS -print` ; \
+ 	     do (cd $${subdir} && $(RM) -r RCS CVS SCCS \#* *~) ; done ; \
+ 	else true; fi
+ #if (defined(PDUMP) && !defined (DUMP_IN_EXEC)) || (defined (PDUMP) && defined(WIN32_NATIVE))

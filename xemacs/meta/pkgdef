@@ -1,0 +1,9 @@
+[xemacs]
+pkgname="${pkgprefix}${topdir}"
+name="xemacs - xemacs"
+pkgcat="application"
+pkgvendor="http://www.xemacs.org"
+shortdesc="xemacs"
+pkgver="$pkgver"
+files(-,root,bin)
+*

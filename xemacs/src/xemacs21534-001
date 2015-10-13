@@ -1,0 +1,13 @@
+--- xemacs-21.5.34/lib-src/Makefile.in.in.orig	2013-08-21 18:43:44.000000000 +0100
++++ xemacs-21.5.34/lib-src/Makefile.in.in	2015-10-12 16:36:12.777279000 +0100
+@@ -347,8 +347,8 @@
+ sorted-doc: ${srcdir}/sorted-doc.c
+ 	$(CC) $(cflags) ${srcdir}/sorted-doc.c $(ldflags) -o $@
+ 
+-b2m: ${srcdir}/b2m.c ../src/config.h
+-	$(CC) $(cflags) ${srcdir}/b2m.c $(ldflags) -o $@
++b2m: ${srcdir}/b2m.c $(GETOPTDEPS) ../src/config.h
++	$(CC) $(cflags) ${srcdir}/b2m.c $(GETOPTOBJS) $(ldflags) -o $@
+ 
+ movemail: ${srcdir}/movemail.c ${srcdir}/pop.c ${srcdir}/pop.h $(GETOPTDEPS) regex.o \
+ 	../src/config.h
