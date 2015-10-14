@@ -1,0 +1,9 @@
+[libffi]
+pkgname="${pkgprefix}${topdir}"
+name="libffi - The libffi library provides a portable, high level programming interface to various calling conventions"
+pkgcat="application"
+pkgvendor="https://sourceware.org/libffi/"
+shortdesc="The libffi library provides a portable, high level programming interface to various calling conventions"
+pkgver="$pkgver"
+files(-,root,bin)
+*
