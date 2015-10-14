@@ -1,0 +1,9 @@
+[libxml2]
+pkgname="${pkgprefix}${topdir}"
+name="libxml2 - Libxml2 is the XML C parser and toolkit developed for the Gnome project"
+pkgcat="application"
+pkgvendor="http://www.xmlsoft.org/"
+shortdesc="Libxml2 is the XML C parser and toolkit developed for the Gnome project"
+pkgver="$pkgver"
+files(-,root,bin)
+*
