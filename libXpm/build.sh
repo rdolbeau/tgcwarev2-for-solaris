@@ -7,7 +7,7 @@
 # Check the following 4 variables before running the script
 topdir=libXpm
 version=3.4k
-pkgver=1
+pkgver=2
 #source[0]=http://xorg.freedesktop.org/releases/individual/lib/${topdir}-${version}.tar.gz
 #source[0]=ftp://ftp.x.org/contrib/libraries/libXpm-4.7.tar.gz
 source[0]=ftp://ftp.x.org/contrib/libraries/xpm-${version}.tar.gz
@@ -48,7 +48,7 @@ install()
 {
     setdir ${srcdir}/${topsrcdir}/
     export PATH=$PATH:/usr/openwin/bin
-    make BINDIR=${prefix}/bin INCROOT=${prefix}/include USRLIBDIR=${prefix}/lib SHLIBDIR=${prefix}/lib MANPATH=${prefix}/share/man DESTDIR=${stagedir} install
+    make BINDIR=${prefix}/bin INCROOT=${prefix}/include USRLIBDIR=${prefix}/lib SHLIBDIR=${prefix}/lib XPMINCDIR=${prefix}/include MANPATH=${prefix}/share/man DESTDIR=${stagedir} install
     chmod 755 ${stagedir}/${prefix}/bin/*  ${stagedir}/${prefix}/lib/*.so*
     doc COPYRIGHT
 }
