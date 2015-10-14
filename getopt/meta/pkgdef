@@ -1,0 +1,9 @@
+[getopt]
+pkgname="${pkgprefix}${topdir}"
+name="getopt - Standalone GNU getopt package"
+pkgcat="application"
+pkgvendor="http://ftp.math.utah.edu/pub/getopt/"
+shortdesc="Standalone GNU getopt package"
+pkgver="$pkgver"
+files(-,root,bin)
+*

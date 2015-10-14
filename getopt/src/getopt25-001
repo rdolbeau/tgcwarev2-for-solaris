@@ -1,0 +1,32 @@
+--- getopt-2.5/Makefile.in.orig	2015-10-14 14:40:03.402631000 +0100
++++ getopt-2.5/Makefile.in	2015-10-14 14:41:02.533529000 +0100
+@@ -14,14 +14,15 @@
+ RANLIB	= @RANLIB@
+ RM	= /bin/rm -f
+ TRUE	= @TRUE@
++DESTDIR =
+ 
+ ### ====================================================================
+ 
+ LIBNAME	= libgetopt.a
+ 
+ HDRS	= ./posix/gettext.h ./posix/getopt.h
+-INSHDRS	= $(incdir)/gettext.h $(incdir)/getopt.h
+-INSLIB	= $(libdir)/$(LIBNAME)
++INSHDRS	= $(DESTDIR)$(incdir)/gettext.h $(DESTDIR)$(incdir)/getopt.h
++INSLIB	= $(DESTDIR)$(libdir)/$(LIBNAME)
+ SRCS	= env/getenv.c env/setenv.c gettext/gettext.c posix/getopt.c \
+ 	  posix/getopt1.c posix/getopt_init.c 
+ OBJS	= $(SRCS:.c=.o)
+@@ -43,8 +44,9 @@
+ 	-$(RM) -r autom4te.cache
+ 
+ install:	uninstall all
+-	$(CP) $(HDRS) $(incdir)/
+-	$(CP) $(LIBNAME) $(libdir)/
++	mkdir -p $(DESTDIR)$(incdir) $(DESTDIR)$(libdir)
++	$(CP) $(HDRS) $(DESTDIR)$(incdir)/
++	$(CP) $(LIBNAME) $(DESTDIR)$(libdir)/
+ 	$(CHMOD) 664 $(INSHDRS)
+ 	$(MAKE) install-show
+ 
