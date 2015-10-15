@@ -1,0 +1,9 @@
+[itstool]
+pkgname="${pkgprefix}${topdir}"
+name="itstool - ITS Tool allows you to translate your XML documents with PO files"
+pkgcat="application"
+pkgvendor="http://itstool.org/"
+shortdesc="ITS Tool allows you to translate your XML documents with PO files"
+pkgver="$pkgver"
+files(-,root,bin)
+*
