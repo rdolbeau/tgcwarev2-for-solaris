@@ -6,7 +6,7 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=libxml2
-version=2.9.2
+version=2.7.8
 pkgver=1
 source[0]=ftp://xmlsoft.org/libxml2/${topdir}-${version}.tar.gz
 # If there are no patches, simply comment this
