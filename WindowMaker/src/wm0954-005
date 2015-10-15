@@ -1,0 +1,95 @@
+--- WindowMaker-0.95.4/src/xmodifier.c.orig	2013-01-09 21:42:39.000000000 +0000
++++ WindowMaker-0.95.4/src/xmodifier.c	2015-10-15 09:18:53.515312000 +0100
+@@ -33,7 +33,6 @@
+ #include <strings.h>
+ #include <X11/Xlib.h>
+ #include <X11/keysym.h>
+-#include <X11/XKBlib.h>
+ 
+ #include <WINGs/WUtil.h>
+ #include "xmodifier.h"
+@@ -161,7 +160,7 @@
+ 			for (column = 0; column < 4; column += 2) {
+ 				KeyCode code = x_modifier_keymap->modifiermap[modifier_index * mkpm
+ 									      + modifier_key];
+-				KeySym sym = (code ? XkbKeycodeToKeysym(display, code, 0, column) : 0);
++				KeySym sym = (code ? XKeycodeToKeysym(display, code, column) : 0);
+ 				if (sym == last_sym)
+ 					continue;
+ 				last_sym = sym;
+--- WindowMaker-0.95.4/src/winmenu.c.orig	2013-01-09 21:42:39.000000000 +0000
++++ WindowMaker-0.95.4/src/winmenu.c	2015-10-15 13:53:44.479628000 +0100
+@@ -28,7 +28,6 @@
+ 
+ #include <X11/Xlib.h>
+ #include <X11/Xutil.h>
+-#include <X11/XKBlib.h>
+ 
+ #include "WindowMaker.h"
+ #include "actions.h"
+@@ -247,7 +246,7 @@
+ static char *getShortcutString(WShortKey key)
+ {
+ 	char *tmp = NULL;
+-	char *k = XKeysymToString(XkbKeycodeToKeysym(dpy, key.keycode, 0, 0));
++	char *k = XKeysymToString(XKeycodeToKeysym(dpy, key.keycode, 0));
+ 	if (!k) return NULL;
+ 
+ 	char **m = wPreferences.modifier_labels;
+--- WindowMaker-0.95.4/WPrefs.app/KeyboardShortcuts.c.orig	2013-01-09 21:42:38.000000000 +0000
++++ WindowMaker-0.95.4/WPrefs.app/KeyboardShortcuts.c	2015-10-15 15:16:11.508775000 +0100
+@@ -25,7 +25,6 @@
+ #include <ctype.h>
+
+ #include <X11/keysym.h>
+-#include <X11/XKBlib.h>
+
+ typedef struct _Panel {
+	WMBox *box;
+@@ -243,7 +243,7 @@
+ 		XAllowEvents(dpy, AsyncKeyboard, CurrentTime);
+ 		WMNextEvent(dpy, &ev);
+ 		if (ev.type == KeyPress && ev.xkey.keycode != 0) {
+-			ksym = XkbKeycodeToKeysym(dpy, ev.xkey.keycode, 0, 0);
++			ksym = XKeycodeToKeysym(dpy, ev.xkey.keycode, 0);
+ 			if (!IsModifierKey(ksym)) {
+ 				if (convert_case) {
+ 					XConvertCase(ksym, &lksym, &uksym);
+--- WindowMaker-0.95.4/WPrefs.app/MouseSettings.c.orig	2013-01-09 21:42:38.000000000 +0000
++++ WindowMaker-0.95.4/WPrefs.app/MouseSettings.c	2015-10-15 15:16:25.969017000 +0100
+@@ -23,7 +23,6 @@
+ #include "WPrefs.h"
+ 
+ #include <X11/Xutil.h>
+-#include <X11/XKBlib.h>
+ 
+ #include <unistd.h>
+ #include <math.h>
+@@ -362,7 +361,7 @@
+ 			if (mapping->modifiermap[idx] != 0) {
+ 				int l;
+ 				for (l = 0; l < 4; l++) {
+-					ksym = XkbKeycodeToKeysym(dpy, mapping->modifiermap[idx], 0, l);
++					ksym = XKeycodeToKeysym(dpy, mapping->modifiermap[idx], l);
+ 					if (ksym != NoSymbol)
+ 						break;
+ 				}
+--- WindowMaker-0.95.4/WPrefs.app/xmodifier.c.orig	2013-01-09 21:42:39.000000000 +0000
++++ WindowMaker-0.95.4/WPrefs.app/xmodifier.c	2015-10-15 15:17:02.839605000 +0100
+@@ -35,7 +35,6 @@
+ #include <strings.h>
+ #include <X11/Xlib.h>
+ #include <X11/keysym.h>
+-#include <X11/XKBlib.h>
+ 
+ #include <WINGs/WUtil.h>
+ 
+@@ -160,7 +159,7 @@
+ 			for (column = 0; column < 4; column += 2) {
+ 				KeyCode code = x_modifier_keymap->modifiermap[modifier_index * mkpm
+ 									      + modifier_key];
+-				KeySym sym = (code ? XkbKeycodeToKeysym(display, code, 0, column) : 0);
++				KeySym sym = (code ? XKeycodeToKeysym(display, code, column) : 0);
+ 				if (sym == last_sym)
+ 					continue;
+ 				last_sym = sym;

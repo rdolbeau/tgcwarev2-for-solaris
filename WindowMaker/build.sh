@@ -6,7 +6,7 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=WindowMaker
-version=0.95.2
+version=0.95.4
 pkgver=1
 source[0]=http://windowmaker.org/pub/source/release/$topdir-$version.tar.gz
 # If there are no patches, simply comment this
@@ -24,6 +24,8 @@ patch[1]=wm0952-002
 patch[2]=""
 #no __progname in Solaris
 patch[3]=wm0952-004
+#broken XKB in Sol7
+patch[4]=wm0954-005
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
