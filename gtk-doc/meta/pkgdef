@@ -1,0 +1,10 @@
+[gtkdoc]
+pkgname="${pkgprefix}${topdir}"
+name="GTK-Doc - GTK-Doc is a project which was started to generate API documentation from comments added to C code"
+pkgcat="application"
+pkgvendor="http://www.gtk.org/gtk-doc/"
+shortdesc="GTK-Doc is a project which was started to generate API documentation from comments
+ added to C code"
+pkgver="$pkgver"
+files(-,root,bin)
+*
