@@ -1,0 +1,9 @@
+[libxslt]
+pkgname="${pkgprefix}${topdir}"
+name="libxslt - Libxslt is the XSLT C library developed for the GNOME project"
+pkgcat="application"
+pkgvendor="http://www.xmlsoft.org/"
+shortdesc="Libxslt is the XSLT C library developed for the GNOME project"
+pkgver="$pkgver"
+files(-,root,bin)
+*
