@@ -4,3 +4,4 @@ TGCWindowMaker TGClibpng auto
 TGCWindowMaker TGCjpeg auto
 TGCWindowMaker TGCgiflib auto
 TGCWindowMaker TGClibXpm auto
+TGCWindowMaker TGCgetopt auto

@@ -1,0 +1,228 @@
+--- WindowMaker-0.95.2/util/convertfonts.c.orig	2012-02-14 19:36:01.000000000 +0000
++++ WindowMaker-0.95.2/util/convertfonts.c	2015-10-14 12:19:29.615798000 +0100
+@@ -48,7 +48,7 @@
+ 	NULL
+ };
+ 
+-extern char *__progname;
++char *__progname;
+ 
+ extern char *convertFont(char *font, Bool keepXLFD);
+ 
+@@ -84,6 +84,7 @@
+ 		{ "keep-xlfd",	no_argument,	&keepXLFD,	True },
+ 		{ NULL,		0,		NULL,		0 }
+ 	};
++__progname = argv[0];
+ 
+ 	while ((ch = getopt_long(argc, argv, "hv", longopts, NULL)) != -1)
+ 		switch(ch) {
+--- WindowMaker-0.95.2/util/geticonset.c.orig	2012-02-14 19:36:01.000000000 +0000
++++ WindowMaker-0.95.2/util/geticonset.c	2015-10-14 12:19:36.405910000 +0100
+@@ -32,7 +32,7 @@
+ 
+ #include "../src/wconfig.h"
+ 
+-extern char *__progname;
++char *__progname;
+ 
+ void print_help(int print_usage, int exitval)
+ {
+@@ -58,6 +58,7 @@
+ 		{ "help",	no_argument,	NULL,		'h' },
+ 		{ NULL,		0,		NULL,		0 }
+ 	};
++__progname = argv[0];
+ 
+ 	while ((ch = getopt_long(argc, argv, "hv", longopts, NULL)) != -1)
+ 		switch(ch) {
+--- WindowMaker-0.95.2/util/getstyle.c.orig	2012-02-14 19:36:01.000000000 +0000
++++ WindowMaker-0.95.2/util/getstyle.c	2015-10-14 12:19:40.315974000 +0100
+@@ -126,7 +126,7 @@
+ 	NULL
+ };
+ 
+-extern char *__progname;
++char *__progname;
+ 
+ WMPropList *PixmapPath = NULL;
+ 
+@@ -288,6 +288,7 @@
+ 		{ "help",		no_argument,	NULL,	'h' },
+ 		{ NULL,			0,		NULL,	0 }
+ 	};
++__progname = argv[0];
+ 
+ 	while ((ch = getopt_long(argc, argv, "ptvh", longopts, NULL)) != -1)
+ 		switch(ch) {
+--- WindowMaker-0.95.2/util/seticons.c.orig	2012-02-14 19:36:01.000000000 +0000
++++ WindowMaker-0.95.2/util/seticons.c	2015-10-14 12:18:06.564473000 +0100
+@@ -32,7 +32,7 @@
+ 
+ #include "../src/wconfig.h"
+ 
+-extern char *__progname;
++char *__progname;
+ 
+ void print_help(int print_usage, int exitval)
+ {
+@@ -58,6 +58,7 @@
+ 		{ "help",	no_argument,	NULL,		'h' },
+ 		{ NULL,		0,		NULL,		0 }
+ 	};
++__progname = argv[0];
+ 
+ 	while ((ch = getopt_long(argc, argv, "hv", longopts, NULL)) != -1)
+ 		switch(ch) {
+--- WindowMaker-0.95.2/util/setstyle.c.orig	2012-02-14 19:36:01.000000000 +0000
++++ WindowMaker-0.95.2/util/setstyle.c	2015-10-14 12:18:13.104589000 +0100
+@@ -69,7 +69,7 @@
+ 	NULL
+ };
+ 
+-extern char *__progname;
++char *__progname;
+ int ignoreFonts = 0;
+ int ignoreCursors = 0;
+ 
+@@ -383,6 +383,8 @@
+ 		{ "ignore",	required_argument,	&ignflag,		1 },
+ 		{ NULL,		0,			NULL,			0 }
+ 	};
++__progname = argv[0];
++
+ 
+ 	while ((ch = getopt_long(argc, argv, "hv", longopts, NULL)) != -1)
+ 		switch(ch) {
+--- WindowMaker-0.95.2/util/wdread.c.orig	2012-02-14 19:36:01.000000000 +0000
++++ WindowMaker-0.95.2/util/wdread.c	2015-10-14 12:18:23.574745000 +0100
+@@ -39,7 +39,7 @@
+ 
+ #include "../src/wconfig.h"
+ 
+-extern char *__progname;
++char *__progname;
+ 
+ void print_help(int print_usage, int exitval)
+ {
+@@ -64,6 +64,7 @@
+ 		{ "help",	no_argument,		NULL,			'h' },
+ 		{ NULL,		0,			NULL,			0 }
+ 	};
++__progname = argv[0];
+ 
+ 	while ((ch = getopt_long(argc, argv, "hv", longopts, NULL)) != -1)
+ 		switch(ch) {
+--- WindowMaker-0.95.2/util/wdwrite.c.orig	2012-02-14 19:36:01.000000000 +0000
++++ WindowMaker-0.95.2/util/wdwrite.c	2015-10-14 12:18:30.364856000 +0100
+@@ -39,7 +39,7 @@
+ 
+ #include "../src/wconfig.h"
+ 
+-extern char *__progname;
++char *__progname;
+ 
+ void print_help(int print_usage, int exitval)
+ {
+@@ -64,6 +64,7 @@
+ 		{ "help",	no_argument,		NULL,			'h' },
+ 		{ NULL,		0,			NULL,			0 }
+ 	};
++__progname = argv[0];
+ 
+ 	while ((ch = getopt_long(argc, argv, "hv", longopts, NULL)) != -1)
+ 		switch(ch) {
+--- WindowMaker-0.95.2/util/wmgenmenu.c.orig	2012-02-14 19:36:01.000000000 +0000
++++ WindowMaker-0.95.2/util/wmgenmenu.c	2015-10-14 12:18:36.604955000 +0100
+@@ -25,7 +25,7 @@
+ static void other_window_managers(void);
+ static void print_help(int print_usage, int exitval);
+ 
+-extern char *__progname;
++char *__progname;
+ 
+ char *path, *terminal = NULL;
+ 
+@@ -41,6 +41,7 @@
+ 		{ "help",		no_argument,	NULL,	'h' },
+ 		{ NULL,			0,		NULL,	0 }
+ 	};
++__progname = argv[0];
+ 
+ 	while ((ch = getopt_long(argc, argv, "hv", longopts, NULL)) != -1)
+ 		switch (ch) {
+--- WindowMaker-0.95.2/util/wmmenugen.c.orig	2012-02-14 19:36:01.000000000 +0000
++++ WindowMaker-0.95.2/util/wmmenugen.c	2015-10-14 12:18:43.875065000 +0100
+@@ -43,13 +43,14 @@
+ static WMArray *plMenuNodes;
+ char *terminal;
+ 
+-extern char *__progname;
++char *__progname;
+ 
+ int main(int argc, char **argv)
+ {
+ 	struct stat st;
+ 	int i;
+ 	int *previousDepth;
++__progname = argv[0];
+ 
+ 	plMenuNodes = WMCreateArray(8); /* grows on demand */
+ 	menu = (WMTreeNode *)NULL;
+--- WindowMaker-0.95.2/util/wmsetbg.c.orig	2012-02-14 19:36:01.000000000 +0000
++++ WindowMaker-0.95.2/util/wmsetbg.c	2015-10-14 12:19:05.505422000 +0100
+@@ -82,7 +82,7 @@
+ char *PixmapPath = NULL;
+ 
+ extern Pixmap LoadJPEG(RContext * rc, char *file_name, int *width, int *height);
+-extern char *__progname;
++char *__progname;
+ 
+ typedef struct BackgroundTexture {
+ 	int refcount;
+@@ -1196,6 +1196,7 @@
+ 	int update = 0, cpc = 4, render_mode = RDitheredRendering, obey_user = 0;
+ 	char *texture = NULL;
+ 	int workspace = -1;
++__progname = argv[0];
+ 
+ 	signal(SIGINT, SIG_DFL);
+ 	signal(SIGTERM, SIG_DFL);
+--- WindowMaker-0.95.2/util/wxcopy.c.orig	2012-02-14 19:36:01.000000000 +0000
++++ WindowMaker-0.95.2/util/wxcopy.c	2015-10-14 12:19:15.245579000 +0100
+@@ -30,7 +30,7 @@
+ #define LINESIZE	(4*1024)
+ #define MAXDATA		(64*1024)
+ 
+-extern char *__progname;
++char *__progname;
+ 
+ void print_help()
+ {
+@@ -64,6 +64,7 @@
+ 	int buf_len = 0;
+ 	int limit_check = 1;
+ 	int clear_selection = 0;
++__progname = argv[0];
+ 
+ 	for (i = 1; i < argc; i++) {
+ 		if (argv[i][0] == '-') {
+--- WindowMaker-0.95.2/util/wxpaste.c.orig	2012-02-14 19:36:01.000000000 +0000
++++ WindowMaker-0.95.2/util/wxpaste.c	2015-10-14 12:19:20.855656000 +0100
+@@ -34,7 +34,7 @@
+ 
+ #define MAXDATA		(4*1024*1024)
+ 
+-extern char *__progname;
++char *__progname;
+ 
+ void print_help()
+ {
+@@ -155,6 +155,7 @@
+ 	int status;
+ 	char *display_name = "";
+ 	char *selection_name = NULL;
++__progname = argv[0];
+ 
+ 	for (i = 1; i < argc; i++) {
+ 		if (argv[i][0] == '-') {
