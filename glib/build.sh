@@ -6,10 +6,12 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=glib
-baseversion=2.16
-version=${baseversion}.6
+baseversion=2.20
+version=${baseversion}.5
 pkgver=1
-source[0]=http://ftp.gnome.org/pub/gnome/sources/glib/${baseversion}/$topdir-$version.tar.gz
+#source[0]=http://ftp.gnome.org/pub/gnome/sources/glib/${baseversion}/$topdir-$version.tar.gz
+source[0]=http://ftp.gnome.org/pub/gnome/sources/glib/${baseversion}/$topdir-$version.tar.bz2
+#source[0]=http://ftp.gnome.org/pub/gnome/sources/glib/${baseversion}/$topdir-$version.tar.xz
 # If there are no patches, simply comment this
 #patch[0]=
 
@@ -20,6 +22,7 @@ configure_args+=(--with-libiconv=gnu)
 
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib"
+export PYTHON=$prefix/bin/python2.7
 
 reg prep
 prep()
