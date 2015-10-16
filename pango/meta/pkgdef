@@ -1,0 +1,9 @@
+[pango]
+pkgname="${pkgprefix}${topdir}"
+name="pango - Pango is a library for laying out and rendering of text"
+pkgcat="application"
+pkgvendor="http://www.pango.org/"
+shortdesc="Pango is a library for laying out and rendering of text"
+pkgver="$pkgver"
+files(-,root,bin)
+*
