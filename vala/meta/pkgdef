@@ -1,0 +1,9 @@
+[vala]
+pkgname="${pkgprefix}${topdir}"
+name="vala - Vala is a new programming language that aims to bring modern programming language features to GNOME developers"
+pkgcat="application"
+pkgvendor="https://wiki.gnome.org/Projects/Vala"
+shortdesc="Vala is a new programming language that aims to bring modern programming language features to GNOME developers"
+pkgver="$pkgver"
+files(-,root,bin)
+*
