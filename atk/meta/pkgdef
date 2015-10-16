@@ -1,0 +1,9 @@
+[atk]
+pkgname="${pkgprefix}${topdir}"
+name="atk - ATK provides the set of accessibility interfaces that are implemented by other toolkits and applications"
+pkgcat="application"
+pkgvendor="https://developer.gnome.org/atk/"
+shortdesc="ATK provides the set of accessibility interfaces that are implemented by other toolkits and applications"
+pkgver="$pkgver"
+files(-,root,bin)
+*
