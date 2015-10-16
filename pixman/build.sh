@@ -6,7 +6,7 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=pixman
-version=0.10.0
+version=0.16.0
 pkgver=1
 source[0]=http://cairographics.org/releases/${topdir}-${version}.tar.gz
 # If there are no patches, simply comment this
