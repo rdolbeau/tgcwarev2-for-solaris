@@ -1,0 +1,11 @@
+--- xpm-3.4k/lib/Imakefile.orig	1998-03-19 19:50:59.000000000 +0000
++++ xpm-3.4k/lib/Imakefile	2015-10-14 15:08:34.792649000 +0100
+@@ -128,7 +128,7 @@
+ #else
+ #define LibName Xpm
+ #define SoRev SOXPMLIBREV
+-#define IncSubdir X11
++#define IncSubdir
+ /* we have to cheat on Library.tmpl to get what we want... */
+ #define INCDIR XPMINCDIR
+ #define USRLIBDIR XPMLIBDIR
