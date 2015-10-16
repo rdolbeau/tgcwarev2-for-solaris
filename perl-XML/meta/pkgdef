@@ -1,0 +1,11 @@
+[perl-XML-Parser]
+pkgname="${pkgprefix}plxml"
+name="perl-XML-Parser - Perl module XML-Parser"
+pkgcat="application"
+pkgvendor="http://search.cpan.org/~toddr/"
+pkgdesc="XML::Parser - A perl module for parsing XML documents"
+pkgver="$pkgver"
+files(-,root,bin)
+$_libdir
+$_mandir
+
