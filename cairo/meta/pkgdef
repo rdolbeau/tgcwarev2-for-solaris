@@ -1,0 +1,9 @@
+[cairo]
+pkgname="${pkgprefix}${topdir}"
+name="cairo - Cairo is a 2D graphics library with support for multiple output devices"
+pkgcat="application"
+pkgvendor="http://cairographics.org/"
+shortdesc="Cairo is a 2D graphics library with support for multiple output devices"
+pkgver="$pkgver"
+files(-,root,bin)
+*
