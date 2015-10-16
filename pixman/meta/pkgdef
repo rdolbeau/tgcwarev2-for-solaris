@@ -1,0 +1,9 @@
+[pixman]
+pkgname="${pkgprefix}${topdir}"
+name="pixman - pixman library for cairo"
+pkgcat="application"
+pkgvendor="http://cairographics.org/"
+shortdesc="pixman library for cairo"
+pkgver="$pkgver"
+files(-,root,bin)
+*
