@@ -1,0 +1,9 @@
+[intltool]
+pkgname="${pkgprefix}${topdir}"
+name="intltool - intltool is a set of tools to centralize translation of many different file formats"
+pkgcat="application"
+pkgvendor="http://freedesktop.org/wiki/Software/intltool/"
+shortdesc="intltool is a set of tools to centralize translation of many different file formats"
+pkgver="$pkgver"
+files(-,root,bin)
+*
