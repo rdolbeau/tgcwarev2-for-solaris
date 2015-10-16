@@ -1,0 +1,11 @@
+--- cairo-1.6.4/configure.orig	2008-04-11 22:33:44.000000000 +0100
++++ cairo-1.6.4/configure	2015-10-16 11:54:32.823239000 +0100
+@@ -26823,7 +26823,7 @@
+ 
+   if test "x$png_REQUIRES" = x; then
+     # libpng13 is GnuWin32's libpng-1.2.8 :-(
+-    for l in libpng12 libpng13 libpng10 ; do
++    for l in libpng16 libpng12 libpng13 libpng10 ; do
+       if $PKG_CONFIG --exists $l ; then
+         png_REQUIRES=$l
+         use_png=yes
