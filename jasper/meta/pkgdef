@@ -1,0 +1,9 @@
+[jasper]
+pkgname="${pkgprefix}${topdir}"
+name="jasper - The JasPer Project is an open-source initiative to provide a free software-based reference implementation of the codec specified in the JPEG-2000 Part-1 standard"
+pkgcat="application"
+pkgvendor="https://www.ece.uvic.ca/~frodo/jasper/"
+shortdesc="The JasPer Project is an open-source initiative to provide a free software-based reference implementation of the codec specified in the JPEG-2000 Part-1 standard"
+pkgver="$pkgver"
+files(-,root,bin)
+*
