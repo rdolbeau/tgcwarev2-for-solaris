@@ -1,0 +1,56 @@
+--- gtk+-2.16.6/gdk-pixbuf/io-png.c.orig	2009-06-04 20:18:03.000000000 +0100
++++ gtk+-2.16.6/gdk-pixbuf/io-png.c	2015-10-19 13:21:29.851474000 +0100
+@@ -184,7 +184,7 @@
+                              error_msg);
+         }
+ 
+-        longjmp (png_save_ptr->jmpbuf, 1);
++        longjmp (png_jmpbuf(png_save_ptr), 1);
+ }
+ 
+ static void
+@@ -282,7 +282,7 @@
+ 		return NULL;
+ 	}
+ 
+-	if (setjmp (png_ptr->jmpbuf)) {
++	if (setjmp (png_jmpbuf(png_ptr))) {
+ 	    	g_free (rows);
+ 
+ 		if (pixbuf)
+@@ -442,7 +442,7 @@
+                 return NULL;
+         }
+         
+-	if (setjmp (lc->png_read_ptr->jmpbuf)) {
++	if (setjmp (png_jmpbuf(lc->png_read_ptr))) {
+ 		if (lc->png_info_ptr)
+ 			png_destroy_read_struct(&lc->png_read_ptr, NULL, NULL);
+                 g_free(lc);
+@@ -514,7 +514,7 @@
+         lc->error = error;
+         
+         /* Invokes our callbacks as needed */
+-	if (setjmp (lc->png_read_ptr->jmpbuf)) {
++	if (setjmp (png_jmpbuf(lc->png_read_ptr))) {
+                 lc->error = NULL;
+ 		return FALSE;
+ 	} else {
+@@ -734,7 +734,7 @@
+                              error_msg);
+         }
+ 
+-        longjmp (png_read_ptr->jmpbuf, 1);
++        longjmp (png_jmpbuf(png_read_ptr), 1);
+ }
+ 
+ static void
+@@ -924,7 +924,7 @@
+ 	       success = FALSE;
+ 	       goto cleanup;
+        }
+-       if (setjmp (png_ptr->jmpbuf)) {
++       if (setjmp (png_jmpbuf(png_ptr))) {
+ 	       success = FALSE;
+ 	       goto cleanup;
+        }

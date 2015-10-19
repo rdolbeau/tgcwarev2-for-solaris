@@ -1,0 +1,9 @@
+[gtkplus]
+pkgname="${pkgprefix}${topdir}"
+name="GTK+ - GTK+, or the GIMP Toolkit, is a multi-platform toolkit for creating graphical user interfaces"
+pkgcat="application"
+pkgvendor="http://www.gtk.org/"
+shortdesc="GTK+, or the GIMP Toolkit, is a multi-platform toolkit for creating graphical user interfaces"
+pkgver="$pkgver"
+files(-,root,bin)
+*
