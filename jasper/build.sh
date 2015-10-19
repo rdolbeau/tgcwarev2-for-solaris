@@ -17,6 +17,7 @@ source[0]=https://www.ece.uvic.ca/~frodo/jasper/software/${topdir}-${version}.zi
 
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib"
+configure_args+=(--enable-shared)
 
 reg prep
 prep()
