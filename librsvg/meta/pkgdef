@@ -1,0 +1,9 @@
+[librsvg]
+pkgname="${pkgprefix}${topdir}"
+name="librsvg - librsvg is a library to render SVG files using cairo"
+pkgcat="application"
+pkgvendor="https://wiki.gnome.org/action/show/Projects/LibRsvg"
+shortdesc="librsvg is a library to render SVG files using cairo"
+pkgver="$pkgver"
+files(-,root,bin)
+*
