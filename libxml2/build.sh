@@ -7,7 +7,7 @@
 # Check the following 4 variables before running the script
 topdir=libxml2
 version=2.7.8
-pkgver=1
+pkgver=2
 source[0]=ftp://xmlsoft.org/libxml2/${topdir}-${version}.tar.gz
 # If there are no patches, simply comment this
 #patch[0]=
@@ -17,6 +17,8 @@ source[0]=ftp://xmlsoft.org/libxml2/${topdir}-${version}.tar.gz
 
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib"
+export PYTHON=$prefix/bin/python2.7
+configure_args+=(--with-python)
 
 reg prep
 prep()
