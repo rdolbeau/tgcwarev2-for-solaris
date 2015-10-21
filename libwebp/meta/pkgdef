@@ -1,0 +1,9 @@
+[libwebp]
+pkgname="${pkgprefix}${topdir}"
+name="libwebp -  a library for encoding and decoding WebP image files"
+pkgcat="application"
+pkgvendor="http://www.webmproject.org/"
+shortdesc="libwebp a library for encoding and decoding WebP image files"
+pkgver="$pkgver"
+files(-,root,bin)
+*
