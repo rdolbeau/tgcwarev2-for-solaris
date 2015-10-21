@@ -1,0 +1,9 @@
+[ruby]
+pkgname="${pkgprefix}${topdir}"
+name="ruby - Ruby is a dynamic, open source programming language"
+pkgcat="application"
+pkgvendor="http://www.ijg.org/"
+shortdesc="Ruby is a dynamic, open source programming language"
+pkgver="$pkgver"
+files(-,root,bin)
+*
