@@ -6,10 +6,10 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=vala
-baseversion=0.10
-version=${baseversion}.4
+baseversion=0.30
+version=${baseversion}.0
 pkgver=1
-source[0]=ftp://ftp.gnome.org/pub/gnome/sources/vala/${baseversion}/${topdir}-${version}.tar.bz2
+source[0]=ftp://ftp.gnome.org/pub/gnome/sources/${topdir}/${baseversion}/${topdir}-${version}.tar.xz
 # If there are no patches, simply comment this
 #patch[0]=
 
