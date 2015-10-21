@@ -6,20 +6,21 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=glib
-baseversion=2.20
-version=${baseversion}.5
+baseversion=2.38
+version=${baseversion}.2
 pkgver=1
-#source[0]=http://ftp.gnome.org/pub/gnome/sources/glib/${baseversion}/$topdir-$version.tar.gz
-source[0]=http://ftp.gnome.org/pub/gnome/sources/glib/${baseversion}/$topdir-$version.tar.bz2
-#source[0]=http://ftp.gnome.org/pub/gnome/sources/glib/${baseversion}/$topdir-$version.tar.xz
+source[0]=http://ftp.gnome.org/pub/gnome/sources/${topdir}/${baseversion}/${topdir}-${version}.tar.xz
 # If there are no patches, simply comment this
-#patch[0]=
+#patch[0]=glib2461-001
+patch[0]=glib2382-001
+patch[1]=glib2382-002
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
 
-configure_args+=(--with-libiconv=gnu)
+configure_args+=(--with-libiconv=gnu --with-xml-catalog=/usr/tgcware/etc/xml/catalog.xml)
 
+#export CFLAGS="-DCLOCK_MONOTONIC=CLOCK_REALTIME"
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib"
 export PYTHON=$prefix/bin/python2.7

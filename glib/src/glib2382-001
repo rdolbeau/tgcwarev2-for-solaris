@@ -1,0 +1,270 @@
+diff -ur glib-2.38.2.orig/configure glib-2.38.2/configure
+--- glib-2.38.2.orig/configure	2013-11-12 16:26:48.000000000 +0100
++++ glib-2.38.2/configure	2015-10-21 10:55:44.147285219 +0200
+@@ -23696,22 +23696,6 @@
+ { $as_echo "$as_me:${as_lineno-$LINENO}: result: $glib_cv_value_AF_INET" >&5
+ $as_echo "$glib_cv_value_AF_INET" >&6; }
+ 
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking value of AF_INET6" >&5
+-$as_echo_n "checking value of AF_INET6... " >&6; }
+-if ${glib_cv_value_AF_INET6+:} false; then :
+-  $as_echo_n "(cached) " >&6
+-else
+-  if ac_fn_c_compute_int "$LINENO" "AF_INET6" "glib_cv_value_AF_INET6"        "$glib_inet_includes"; then :
+-
+-else
+-  glib_failed=true
+-fi
+-
+-
+-fi
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $glib_cv_value_AF_INET6" >&5
+-$as_echo "$glib_cv_value_AF_INET6" >&6; }
+-
+ # winsock defines this even though it doesn't support it
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking value of AF_UNIX" >&5
+ $as_echo_n "checking value of AF_UNIX... " >&6; }
+@@ -32739,7 +32723,7 @@
+ 
+ #define GLIB_SYSDEF_AF_UNIX $g_af_unix
+ #define GLIB_SYSDEF_AF_INET $g_af_inet
+-#define GLIB_SYSDEF_AF_INET6 $g_af_inet6
++#define GLIB_SYSDEF_AF_INET6 25
+ 
+ #define GLIB_SYSDEF_MSG_OOB $g_msg_oob
+ #define GLIB_SYSDEF_MSG_PEEK $g_msg_peek
+Only in glib-2.38.2/gio: fake-rfc2553.c
+Only in glib-2.38.2/gio: fake-rfc2553.h
+diff -ur glib-2.38.2.orig/gio/ginetaddress.c glib-2.38.2/gio/ginetaddress.c
+--- glib-2.38.2.orig/gio/ginetaddress.c	2013-11-07 16:29:13.000000000 +0100
++++ glib-2.38.2/gio/ginetaddress.c	2015-10-21 11:23:42.507954002 +0200
+@@ -33,6 +33,8 @@
+ #include "glibintl.h"
+ #include "gnetworkingprivate.h"
+ 
++#include "fake-rfc2553.h"
++
+ struct _GInetAddressPrivate
+ {
+   GSocketFamily family;
+@@ -558,10 +560,14 @@
+ 
+ #else /* !G_OS_WIN32 */
+ 
+-  if (address->priv->family == AF_INET)
+-    inet_ntop (AF_INET, &address->priv->addr.ipv4, buffer, sizeof (buffer));
++  if (address->priv->family == AF_INET) {
++/*    inet_ntop (AF_INET, &address->priv->addr.ipv4, buffer, sizeof (buffer));
+   else
+     inet_ntop (AF_INET6, &address->priv->addr.ipv6, buffer, sizeof (buffer));
++*/
++    char* temp = inet_ntoa(address->priv->addr.ipv4);
++    strncpy(buffer, temp, 48);
++  }
+ #endif
+ 
+   return g_strdup (buffer);
+diff -ur glib-2.38.2.orig/gio/ginetsocketaddress.c glib-2.38.2/gio/ginetsocketaddress.c
+--- glib-2.38.2.orig/gio/ginetsocketaddress.c	2013-11-07 16:29:13.000000000 +0100
++++ glib-2.38.2/gio/ginetsocketaddress.c	2015-10-20 17:49:58.775964063 +0200
+@@ -31,6 +31,8 @@
+ #include "gioerror.h"
+ #include "glibintl.h"
+ 
++#include "fake-rfc2553.h"
++
+ 
+ /**
+  * SECTION:ginetsocketaddress
+diff -ur glib-2.38.2.orig/gio/gioenumtypes.c glib-2.38.2/gio/gioenumtypes.c
+--- glib-2.38.2.orig/gio/gioenumtypes.c	2013-11-12 16:27:24.000000000 +0100
++++ glib-2.38.2/gio/gioenumtypes.c	2015-10-20 17:51:10.704642282 +0200
+@@ -5,6 +5,8 @@
+ #include "gioenumtypes.h"
+ #include <gio.h>
+ 
++#include "fake-rfc2553.h"
++
+ /* enumerations from "gioenums.h" */
+ GType
+ g_app_info_create_flags_get_type (void)
+diff -ur glib-2.38.2.orig/gio/gnetworkaddress.c glib-2.38.2/gio/gnetworkaddress.c
+--- glib-2.38.2.orig/gio/gnetworkaddress.c	2013-11-07 16:29:13.000000000 +0100
++++ glib-2.38.2/gio/gnetworkaddress.c	2015-10-21 11:37:33.498494953 +0200
+@@ -39,6 +39,8 @@
+ 
+ #include <string.h>
+ 
++#include "fake-rfc2553.h"
++
+ 
+ /**
+  * SECTION:gnetworkaddress
+diff -ur glib-2.38.2.orig/gio/gnetworkmonitorbase.c glib-2.38.2/gio/gnetworkmonitorbase.c
+--- glib-2.38.2.orig/gio/gnetworkmonitorbase.c	2013-11-07 16:29:13.000000000 +0100
++++ glib-2.38.2/gio/gnetworkmonitorbase.c	2015-10-20 17:51:16.360381101 +0200
+@@ -33,6 +33,8 @@
+ #include "gtask.h"
+ #include "glibintl.h"
+ 
++#include "fake-rfc2553.h"
++
+ static void g_network_monitor_base_iface_init (GNetworkMonitorInterface *iface);
+ static void g_network_monitor_base_initable_iface_init (GInitableIface *iface);
+ 
+diff -ur glib-2.38.2.orig/gio/gnetworkmonitornetlink.c glib-2.38.2/gio/gnetworkmonitornetlink.c
+--- glib-2.38.2.orig/gio/gnetworkmonitornetlink.c	2013-11-12 06:30:22.000000000 +0100
++++ glib-2.38.2/gio/gnetworkmonitornetlink.c	2015-10-20 17:50:11.955355405 +0200
+@@ -40,6 +40,8 @@
+ #include <linux/netlink.h>
+ #include <linux/rtnetlink.h>
+ 
++#include "fake-rfc2553.h"
++
+ static void g_network_monitor_netlink_iface_init (GNetworkMonitorInterface *iface);
+ static void g_network_monitor_netlink_initable_iface_init (GInitableIface *iface);
+ 
+diff -ur glib-2.38.2.orig/gio/gsocketaddress.c glib-2.38.2/gio/gsocketaddress.c
+--- glib-2.38.2.orig/gio/gsocketaddress.c	2013-10-25 17:58:38.000000000 +0200
++++ glib-2.38.2/gio/gsocketaddress.c	2015-10-20 17:50:22.110886399 +0200
+@@ -40,6 +40,8 @@
+ #include "gunixsocketaddress.h"
+ #endif
+ 
++#include "fake-rfc2553.h"
++
+ 
+ /**
+  * SECTION:gsocketaddress
+diff -ur glib-2.38.2.orig/gio/gsocket.c glib-2.38.2/gio/gsocket.c
+--- glib-2.38.2.orig/gio/gsocket.c	2013-11-12 06:30:22.000000000 +0100
++++ glib-2.38.2/gio/gsocket.c	2015-10-20 17:51:31.387687140 +0200
+@@ -65,6 +65,8 @@
+ #include "gcredentials.h"
+ #include "glibintl.h"
+ 
++#include "fake-rfc2553.h"
++
+ /**
+  * SECTION:gsocket
+  * @short_description: Low-level socket object
+diff -ur glib-2.38.2.orig/gio/gsocketlistener.c glib-2.38.2/gio/gsocketlistener.c
+--- glib-2.38.2.orig/gio/gsocketlistener.c	2013-11-07 16:29:13.000000000 +0100
++++ glib-2.38.2/gio/gsocketlistener.c	2015-10-20 17:51:38.795345058 +0200
+@@ -38,6 +38,8 @@
+ #include <gio/ginetsocketaddress.h>
+ #include "glibintl.h"
+ 
++#include "fake-rfc2553.h"
++
+ 
+ /**
+  * SECTION:gsocketlistener
+diff -ur glib-2.38.2.orig/gio/gsocks5proxy.c glib-2.38.2/gio/gsocks5proxy.c
+--- glib-2.38.2.orig/gio/gsocks5proxy.c	2013-10-25 17:58:38.000000000 +0200
++++ glib-2.38.2/gio/gsocks5proxy.c	2015-10-20 17:51:46.151005380 +0200
+@@ -41,6 +41,8 @@
+ #include "gproxyaddress.h"
+ #include "gtask.h"
+ 
++#include "fake-rfc2553.h"
++
+ #define SOCKS5_VERSION		  0x05
+ 
+ #define SOCKS5_CMD_CONNECT	  0x01
+diff -ur glib-2.38.2.orig/gio/gtcpconnection.c glib-2.38.2/gio/gtcpconnection.c
+--- glib-2.38.2.orig/gio/gtcpconnection.c	2013-11-07 16:29:13.000000000 +0100
++++ glib-2.38.2/gio/gtcpconnection.c	2015-10-20 17:51:51.698749191 +0200
+@@ -29,6 +29,8 @@
+ #include "giostream.h"
+ #include "glibintl.h"
+ 
++#include "fake-rfc2553.h"
++
+ struct _GTcpConnectionPrivate
+ {
+   guint graceful_disconnect : 1;
+diff -ur glib-2.38.2.orig/gio/gtcpwrapperconnection.c glib-2.38.2/gio/gtcpwrapperconnection.c
+--- glib-2.38.2.orig/gio/gtcpwrapperconnection.c	2013-11-07 16:29:13.000000000 +0100
++++ glib-2.38.2/gio/gtcpwrapperconnection.c	2015-10-20 17:52:01.830281330 +0200
+@@ -42,6 +42,8 @@
+ #include "gtcpconnection.h"
+ #include "glibintl.h"
+ 
++#include "fake-rfc2553.h"
++
+ struct _GTcpWrapperConnectionPrivate
+ {
+   GIOStream *base_io_stream;
+diff -ur glib-2.38.2.orig/gio/gthreadedresolver.c glib-2.38.2/gio/gthreadedresolver.c
+--- glib-2.38.2.orig/gio/gthreadedresolver.c	2013-11-07 16:29:13.000000000 +0100
++++ glib-2.38.2/gio/gthreadedresolver.c	2015-10-21 13:56:46.300543025 +0200
+@@ -37,6 +37,8 @@
+ #include "gsocketaddress.h"
+ #include "gsrvtarget.h"
+ 
++#include "fake-rfc2553.h"
++
+ 
+ G_DEFINE_TYPE (GThreadedResolver, g_threaded_resolver, G_TYPE_RESOLVER)
+ 
+diff -ur glib-2.38.2.orig/gio/Makefile.in glib-2.38.2/gio/Makefile.in
+--- glib-2.38.2.orig/gio/Makefile.in	2013-11-12 16:26:50.000000000 +0100
++++ glib-2.38.2/gio/Makefile.in	2015-10-20 19:26:55.103651779 +0200
+@@ -225,7 +225,7 @@
+ am__DEPENDENCIES_3 = $(am__append_20) $(am__append_23) \
+ 	$(am__append_27) $(am__append_30) $(am__DEPENDENCIES_1) \
+ 	$(am__DEPENDENCIES_2)
+-am__libgio_2_0_la_SOURCES_DIST = gappinfo.c gasynchelper.c \
++am__libgio_2_0_la_SOURCES_DIST = fake-rfc2553.c gappinfo.c gasynchelper.c \
+ 	gasynchelper.h gasyncinitable.c gasyncresult.c \
+ 	gbufferedinputstream.c gbufferedoutputstream.c gbytesicon.c \
+ 	gcancellable.c gcharsetconverter.c gconverter.c \
+@@ -406,7 +406,7 @@
+ 	libgio_2_0_la-glocalfileiostream.lo libgio_2_0_la-glocalvfs.lo \
+ 	libgio_2_0_la-gsocks4proxy.lo libgio_2_0_la-gsocks4aproxy.lo \
+ 	libgio_2_0_la-gsocks5proxy.lo $(am__objects_4)
+-am_libgio_2_0_la_OBJECTS = libgio_2_0_la-gappinfo.lo \
++am_libgio_2_0_la_OBJECTS = libgio_2_0_la-fake-rfc2553.lo libgio_2_0_la-gappinfo.lo \
+ 	libgio_2_0_la-gasynchelper.lo libgio_2_0_la-gasyncinitable.lo \
+ 	libgio_2_0_la-gasyncresult.lo \
+ 	libgio_2_0_la-gbufferedinputstream.lo \
+@@ -1384,6 +1384,7 @@
+ @OS_WIN32_TRUE@	$(NULL)
+ 
+ libgio_2_0_la_SOURCES = \
++	fake-rfc2553.c		\
+ 	gappinfo.c 		\
+ 	gasynchelper.c 		\
+ 	gasynchelper.h 		\
+@@ -1542,6 +1543,7 @@
+ 	-export-dynamic $(no_undefined) $(am__append_40)
+ libgio_2_0_la_DEPENDENCIES = $(gio_win32_res) $(gio_def) $(platform_deps)
+ gio_headers = \
++	fake-rfc2553.h		\
+ 	gappinfo.h 		\
+ 	gasyncinitable.h	\
+ 	gasyncresult.h 		\
+@@ -2032,6 +2034,7 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gactiongroup.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gactiongroupexporter.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gactionmap.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-fake-rfc2553.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gappinfo.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gapplication.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gapplicationcommandline.Plo@am__quote@
+@@ -2244,6 +2247,14 @@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+ 
++libgio_2_0_la-fake-rfc2553.lo: fake-rfc2553.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-fake-rfc2553.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-fake-rfc2553.Tpo -c -o libgio_2_0_la-fake-rfc2553.lo `test -f 'fake-rfc2553.c' || echo '$(srcdir)/'`fake-rfc2553.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-fake-rfc2553.Tpo $(DEPDIR)/libgio_2_0_la-fake-rfc2553.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fake-rfc2553.c' object='libgio_2_0_la-fake-rfc2553.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@   $(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-fake-rfc2553.lo `test -f 'fake-rfc2553.c' || echo '$(srcdir)/'`fake-rfc2553.c
++
++
+ libgio_2_0_la-gappinfo.lo: gappinfo.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gappinfo.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gappinfo.Tpo -c -o libgio_2_0_la-gappinfo.lo `test -f 'gappinfo.c' || echo '$(srcdir)/'`gappinfo.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gappinfo.Tpo $(DEPDIR)/libgio_2_0_la-gappinfo.Plo
