@@ -1,0 +1,9 @@
+[gperf]
+pkgname="${pkgprefix}${topdir}"
+name="gperf - GNU gperf is a perfect hash function generator"
+pkgcat="application"
+pkgvendor="https://www.gnu.org/software/gperf/"
+shortdesc="GNU gperf is a perfect hash function generator"
+pkgver="$pkgver"
+files(-,root,bin)
+*
