@@ -1,0 +1,9 @@
+[libsparcatomic]
+pkgname="${pkgprefix}${topdir}"
+name="libsparcatomic - Some basic atomic function for sparc v7/v8"
+pkgcat="application"
+pkgvendor="http://www.dolbeau.name/"
+shortdesc="libsparcatomic - Some basic atomic function for sparc v7/v8"
+pkgver="$pkgver"
+files(-,root,bin)
+*
