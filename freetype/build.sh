@@ -6,7 +6,7 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=freetype
-version=2.4.0
+version=2.6.1
 pkgver=1
 source[0]=http://download.savannah.gnu.org/releases/freetype/$topdir-$version.tar.gz
 # If there are no patches, simply comment this
