@@ -6,10 +6,10 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=atk
-baseversion=1.13
-version=${baseversion}.2
+baseversion=2.18
+version=${baseversion}.0
 pkgver=1
-source[0]=http://ftp.gnome.org/pub/gnome/sources/${topdir}/${baseversion}/$topdir-$version.tar.bz2
+source[0]=http://ftp.gnome.org/pub/gnome/sources/${topdir}/${baseversion}/$topdir-$version.tar.xz
 # If there are no patches, simply comment this
 #patch[0]=
 
