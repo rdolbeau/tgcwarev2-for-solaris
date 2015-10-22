@@ -1,0 +1,11 @@
+--- pixman-0.32.8.orig/demos/srgb-test.c	2015-06-30 11:48:31.000000000 +0200
++++ pixman-0.32.8/demos/srgb-test.c	2015-10-22 17:39:31.567231219 +0200
+@@ -24,7 +24,7 @@
+     if (linear < 0.0031308f)
+ 	return linear * 12.92f;
+     else
+-	return 1.055f * powf (linear, 1.0f/2.4f) - 0.055f;
++	return 1.055f * (float)pow (linear, 1.0f/2.4f) - 0.055f;
+ }
+ 
+ static uint32_t

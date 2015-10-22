@@ -1,0 +1,21 @@
+--- pixman-0.32.8.orig/configure	2015-09-22 16:17:12.000000000 +0200
++++ pixman-0.32.8/configure	2015-10-22 16:41:06.708235637 +0200
+@@ -13979,18 +13979,6 @@
+ 
+ 
+ 
+-ac_fn_c_check_func "$LINENO" "mmap" "ac_cv_func_mmap"
+-if test "x$ac_cv_func_mmap" = xyes; then :
+-  have_mmap=yes
+-else
+-  have_mmap=no
+-fi
+-
+-if test x$have_mmap = xyes; then
+-
+-$as_echo "#define HAVE_MMAP 1" >>confdefs.h
+-
+-fi
+ 
+ ac_fn_c_check_func "$LINENO" "mprotect" "ac_cv_func_mprotect"
+ if test "x$ac_cv_func_mprotect" = xyes; then :
