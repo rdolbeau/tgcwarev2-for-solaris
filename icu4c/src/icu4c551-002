@@ -1,0 +1,14 @@
+--- source/layout/LETypes.h.orig	2015-03-27 21:17:44.000000000 +0000
++++ source/layout/LETypes.h	2015-10-22 13:01:04.976529000 +0100
+@@ -302,11 +302,7 @@
+ #define LE_UINT32_MAX UINT32_MAX
+ #endif
+ 
+-#ifndef UINTPTR_MAX
+ #define LE_UINTPTR_MAX LE_UINT32_MAX
+-#else
+-#define LE_UINTPTR_MAX UINTPTR_MAX
+-#endif
+ 
+ /**
+  * Range check for overflow

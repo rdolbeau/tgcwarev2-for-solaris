@@ -1,0 +1,9 @@
+[icu4c]
+pkgname="${pkgprefix}${topdir}"
+name="icu4c - ICU - International Components for Unicode"
+pkgcat="application"
+pkgvendor="http://www.ijg.org/"
+shortdesc="ICU - International Components for Unicode"
+pkgver="$pkgver"
+files(-,root,bin)
+*
