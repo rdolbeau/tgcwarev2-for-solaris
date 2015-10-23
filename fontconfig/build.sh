@@ -6,7 +6,7 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=fontconfig
-version=2.4.2
+version=2.7.3
 pkgver=1
 source[0]=http://www.freedesktop.org/software/fontconfig/release//$topdir-$version.tar.gz
 # If there are no patches, simply comment this
@@ -16,7 +16,7 @@ source[0]=http://www.freedesktop.org/software/fontconfig/release//$topdir-$versi
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
 
 export CPPFLAGS="-I$prefix/include"
-export LDFLAGS="-L$prefix/lib -R$prefix/lib"
+export LDFLAGS="-L$prefix/lib -R$prefix/lib -L/usr/ucblib -R/usr/ucblib -lucb"
 
 reg prep
 prep()
