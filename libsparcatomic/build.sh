@@ -6,9 +6,9 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=libsparcatomic
-version=0.1.0
+version=0.2.0
 pkgver=1
-source[0]=http://www.dolbeau.name/dolbeau/files/libsparcatomic-0.1.0.tgz
+source[0]=http://www.dolbeau.name/dolbeau/files/${topdir}-${version}.tgz
 # If there are no patches, simply comment this
 #patch[0]=
 
