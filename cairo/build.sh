@@ -6,12 +6,14 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=cairo
-version=1.6.4
+version=1.14.2
 pkgver=1
-source[0]=http://cairographics.org/releases/${topdir}-${version}.tar.gz
+source[0]=http://cairographics.org/releases/${topdir}-${version}.tar.xz
 # If there are no patches, simply comment this
 #libpng16
-patch[0]=cairo164-001
+#patch[0]=cairo164-001
+#missing setenv (+-lgetopt)
+patch[0]=cairo1142-001
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
@@ -19,7 +21,7 @@ patch[0]=cairo164-001
 configure_args+=(--with-libiconv=gnu)
 
 export CPPFLAGS="-I$prefix/include"
-export LDFLAGS="-L$prefix/lib -R$prefix/lib"
+export LDFLAGS="-L$prefix/lib -R$prefix/lib -lgetopt"
 export PYTHON=$prefix/bin/python2.7
 
 reg prep

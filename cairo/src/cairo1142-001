@@ -1,0 +1,22 @@
+--- cairo-1.14.2/util/cairo-trace/trace.c.orig	2015-03-10 22:21:07.000000000 +0000
++++ cairo-1.14.2/util/cairo-trace/trace.c	2015-10-23 08:33:21.386261000 +0100
+@@ -778,6 +778,8 @@
+     _trace_printf ("%%!CairoScript - %s\n", name);
+ }
+ 
++int setenv(const char *name, const char *value, int rewrite);
++
+ static cairo_bool_t
+ _init_logfile (void)
+ {
+--- cairo-1.14.2/util/cairo-sphinx/sphinx.c.orig	2015-03-10 22:21:07.000000000 +0000
++++ cairo-1.14.2/util/cairo-sphinx/sphinx.c	2015-10-23 08:33:50.008116000 +0100
+@@ -1472,6 +1472,8 @@
+     return 0;
+ }
+ 
++int setenv(const char *name, const char *value, int rewrite);
++
+ static int
+ do_exec (int fd, char **argv)
+ {
