@@ -1,0 +1,9 @@
+[smartmontools]
+pkgname="${pkgprefix}${topdir}"
+name="smartmontools - The smartmontools monitors storage systems"
+pkgcat="application"
+pkgvendor="https://www.smartmontools.org/"
+shortdesc="The smartmontools monitors storage systems"
+pkgver="$pkgver"
+files(-,root,bin)
+*

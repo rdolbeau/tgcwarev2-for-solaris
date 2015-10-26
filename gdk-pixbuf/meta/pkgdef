@@ -1,0 +1,9 @@
+[gdk-pixbuf]
+pkgname="${pkgprefix}${topdir}"
+name="gdk-pixbuf - GdkPixbuf is a library for image loading and manipulation"
+pkgcat="application"
+pkgvendor="https://developer.gnome.org/gdk-pixbuf/"
+shortdesc="GdkPixbuf is a library for image loading and manipulation"
+pkgver="$pkgver"
+files(-,root,bin)
+*
