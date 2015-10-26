@@ -12,6 +12,7 @@ pkgver=1
 source[0]=http://ftp.gnome.org/pub/gnome/sources/${topdir}/${baseversion}/${topdir}-${version}.tar.xz
 # If there are no patches, simply comment this
 #patch[0]=glib2461-001
+#hack support for IPV6
 patch[0]=glib2382-001
 patch[1]=glib2382-002
 
