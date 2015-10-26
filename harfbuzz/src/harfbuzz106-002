@@ -1,0 +1,18 @@
+--- harfbuzz-1.0.6/util/ansi-print.cc.orig	2015-05-19 02:37:46.066389000 +0100
++++ harfbuzz-1.0.6/util/ansi-print.cc	2015-10-23 13:05:35.371331000 +0100
+@@ -41,7 +41,6 @@
+ #include <unistd.h> /* for isatty() */
+ #endif
+ 
+-#ifdef _MSC_VER
+ static inline long int
+ lround (double x)
+ {
+@@ -50,7 +49,6 @@
+   else
+     return ceil (x - 0.5);
+ }
+-#endif
+ 
+ #define MIN(a,b) ((a) < (b) ? (a) : (b))
+ 

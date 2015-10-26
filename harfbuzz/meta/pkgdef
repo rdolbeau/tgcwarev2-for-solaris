@@ -1,0 +1,9 @@
+[harfbuzz]
+pkgname="${pkgprefix}${topdir}"
+name="harfbuzz - HarfBuzz is an OpenType text shaping engine" 
+pkgcat="application"
+pkgvendor="http://www.ijg.org/"
+shortdesc="HarfBuzz is an OpenType text shaping engine"
+pkgver="$pkgver"
+files(-,root,bin)
+*

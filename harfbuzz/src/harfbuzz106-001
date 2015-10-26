@@ -1,0 +1,13 @@
+--- harfbuzz-1.0.6/util/options.cc.orig	2015-08-24 13:49:34.845516000 +0100
++++ harfbuzz-1.0.6/util/options.cc	2015-10-23 13:04:28.766737000 +0100
+@@ -553,8 +553,8 @@
+   if (font_size_y == FONT_SIZE_UPEM)
+     font_size_y = hb_face_get_upem (face);
+ 
+-  int scale_x = (int) scalbnf (font_size_x, subpixel_bits);
+-  int scale_y = (int) scalbnf (font_size_y, subpixel_bits);
++  int scale_x = (int) scalbn (font_size_x, subpixel_bits);
++  int scale_y = (int) scalbn (font_size_y, subpixel_bits);
+   hb_font_set_scale (font, scale_x, scale_y);
+   hb_face_destroy (face);
+ 
