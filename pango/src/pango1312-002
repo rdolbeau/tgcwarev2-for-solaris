@@ -1,0 +1,10 @@
+--- pango-1.31.2/pango/pangoxft-font.c.orig	2011-08-16 02:11:08.000000000 +0100
++++ pango-1.31.2/pango/pangoxft-font.c	2015-10-26 13:01:24.239586000 +0000
+@@ -23,6 +23,7 @@
+ 
+ #include <stdlib.h>
+ 
++#include <X11/Xfuncproto.h>
+ #include "pangofc-fontmap.h"
+ #include "pangoxft-private.h"
+ #include "pangofc-private.h"

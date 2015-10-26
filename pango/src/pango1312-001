@@ -1,0 +1,11 @@
+--- pango-1.31.2/pango/pango-ot-buffer.c.orig	2012-08-24 20:08:22.000000000 +0100
++++ pango-1.31.2/pango/pango-ot-buffer.c	2015-10-26 09:37:00.523775000 +0000
+@@ -92,7 +92,7 @@
+ 			   guint          properties,
+ 			   guint          cluster)
+ {
+-  hb_buffer_add (buffer->buffer, glyph, ~properties, cluster);
++  hb_buffer_add (buffer->buffer, glyph, cluster);
+ }
+ 
+ /**
