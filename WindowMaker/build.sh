@@ -31,6 +31,7 @@ patch[4]=wm0954-005
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
 
 #export CFLAGS="-D__STDC__=1 -fPIC"
+export CFLAGS="-g"
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib -lrt -lgetopt"
 
@@ -55,6 +56,7 @@ check()
 reg install
 install()
 {
+    dostrip=0
     generic_install DESTDIR
     doc COPYING AUTHORS NEWS
 }
