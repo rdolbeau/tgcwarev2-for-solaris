@@ -1,0 +1,9 @@
+[wmload]
+pkgname="${pkgprefix}${topdir}"
+name="wmload - wmload displays a graphical representation of the kernel/system statistics"
+pkgcat="application"
+pkgvendor="http://windowmaker.org/dockapps/?name=wmload"
+shortdesc="wmload displays a graphical representation of the kernel/system statistics"
+pkgver="$pkgver"
+files(-,root,bin)
+*
