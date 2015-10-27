@@ -1,0 +1,9 @@
+[wmcpuload]
+pkgname="${pkgprefix}${topdir}"
+name="wmcpuload - wmcpuload is a dockapp; it displays the current CPU usage"
+pkgcat="application"
+pkgvendor="http://windowmaker.org/dockapps/?name=wmcpuload"
+shortdesc="wmcpuload is a dockapp; it displays the current CPU usage"
+pkgver="$pkgver"
+files(-,root,bin)
+*
