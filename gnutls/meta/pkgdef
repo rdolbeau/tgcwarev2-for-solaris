@@ -1,0 +1,9 @@
+[gnutls]
+pkgname="${pkgprefix}${topdir}"
+name="gnutls - GnuTLS is a secure communications library implementing the SSL, TLS and DTLS protocols"
+pkgcat="application"
+pkgvendor="http://www.gnutls.org/"
+shortdesc="GnuTLS is a secure communications library implementing the SSL, TLS and DTLS protocols"
+pkgver="$pkgver"
+files(-,root,bin)
+*
