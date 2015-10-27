@@ -10,6 +10,8 @@ default_docs
 $_bindir/gpg-error
 $_sharedir/locale/*/LC_MESSAGES/libgpg-error.mo
 $_libdir/*.so.*
+$_sharedir/info
+$_sharedir/man
 
 [libgpg-error-devel]
 pkgname="${pkgprefix}lgpged"
