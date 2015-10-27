@@ -1,0 +1,9 @@
+[gobject-introspection]
+pkgname="${pkgprefix}${topdir}"
+name="gobject-introspection - GObject introspection is a middleware layer between C libraries (using GObject) and language bindings"
+pkgcat="application"
+pkgvendor="https://developer.gnome.org/gobject-introspection/"
+shortdesc="GObject introspection is a middleware layer between C libraries (using GObject) and language bindings"
+pkgver="$pkgver"
+files(-,root,bin)
+*
