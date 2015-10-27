@@ -1,0 +1,13 @@
+--- gtk+-2.24.28/gdk/x11/gdkkeys-x11.c.orig	2014-09-29 21:02:16.000000000 +0100
++++ gtk+-2.24.28/gdk/x11/gdkkeys-x11.c	2015-10-26 18:43:11.710196000 +0000
+@@ -1826,8 +1826,10 @@
+   keymap = GET_EFFECTIVE_KEYMAP (keymap);
+   keymap_x11 = GDK_KEYMAP_X11 (keymap);
+ 
++#ifdef HAVE_XKB
+   if (KEYMAP_USE_XKB (keymap))
+     get_xkb (keymap_x11);
++#endif
+ 
+   retval = TRUE;
+ 

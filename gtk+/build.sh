@@ -6,13 +6,15 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=gtk+
-baseversion=2.16
-version=${baseversion}.6
+baseversion=2.24
+version=${baseversion}.28
 pkgver=1
-source[0]=http://ftp.acc.umu.se/pub/gnome/sources/gtk+/${baseversion}/${topdir}-${version}.tar.gz
+source[0]=http://ftp.acc.umu.se/pub/gnome/sources/gtk+/${baseversion}/${topdir}-${version}.tar.xz
 # If there are no patches, simply comment this
 #recent PNG
-patch[0]=gtk+2166-001
+#patch[0]=gtk+2166-001
+#no xkb
+patch[0]=gtk+22428-001
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
