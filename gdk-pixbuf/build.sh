@@ -8,10 +8,11 @@
 topdir=gdk-pixbuf
 baseversion=2.26
 version=${baseversion}.5
-pkgver=1
+pkgver=2
 source[0]=http://ftp.gnome.org/pub/GNOME/sources/${topdir}/${baseversion}/${topdir}-${version}.tar.xz
 # If there are no patches, simply comment this
-#patch[0]=
+#no ceilf in libm
+patch[0]=gdk-pixbuf2265-001
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions

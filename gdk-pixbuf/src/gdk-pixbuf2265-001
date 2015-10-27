@@ -1,0 +1,11 @@
+--- gdk-pixbuf-2.26.5/gdk-pixbuf/io-jpeg.c.orig	2012-09-03 17:16:55.000000000 +0100
++++ gdk-pixbuf-2.26.5/gdk-pixbuf/io-jpeg.c	2015-10-27 09:30:23.867619000 +0000
+@@ -1373,7 +1373,7 @@
+ 			guint size = 0xffef;
+ 			guint offset;
+ 
+-			segments = (guint) ceilf ((gfloat) icc_profile_size / (gfloat) 0xffef);
++			segments = (guint) ceil ((gdouble) icc_profile_size / (gdouble) 0xffef);
+ 			data = g_new (gchar, 0xffff);
+ 			memcpy (data, "ICC_PROFILE\000", 12);
+ 			data[13] = segments;
