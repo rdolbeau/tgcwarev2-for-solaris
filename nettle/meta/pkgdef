@@ -1,0 +1,9 @@
+[nettle]
+pkgname="${pkgprefix}${topdir}"
+name="nettle - Nettle is a cryptographic library "
+pkgcat="application"
+pkgvendor="http://www.lysator.liu.se/~nisse/nettle/"
+shortdesc="Nettle is a cryptographic library"
+pkgver="$pkgver"
+files(-,root,bin)
+*
