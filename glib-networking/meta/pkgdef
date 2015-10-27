@@ -1,0 +1,9 @@
+[glib-networking]
+pkgname="${pkgprefix}${topdir}"
+name="glib-networking - network-related giomodules for GLib"
+pkgcat="application"
+pkgvendor="https://developer.gnome.org/glib-networking/"
+shortdesc="network-related giomodules for GLib"
+pkgver="$pkgver"
+files(-,root,bin)
+*
