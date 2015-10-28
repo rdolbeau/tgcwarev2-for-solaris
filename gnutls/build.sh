@@ -7,10 +7,11 @@
 # Check the following 4 variables before running the script
 topdir=gnutls
 version=3.3.0
-pkgver=1
+pkgver=2
 source[0]=ftp://ftp.gnutls.org/gcrypt/gnutls/v3.3/${topdir}-${version}.tar.xz
 # If there are no patches, simply comment this
-#patch[0]=
+#/dev/random
+patch[0]=gnutls330-001
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
