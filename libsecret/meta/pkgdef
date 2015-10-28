@@ -1,0 +1,9 @@
+[libsecret]
+pkgname="${pkgprefix}${topdir}"
+name="libsecret - libsecret is a library for storing and retrieving passwords and other secrets"
+pkgcat="application"
+pkgvendor="https://wiki.gnome.org/Projects/Libsecret"
+shortdesc="libsecret is a library for storing and retrieving passwords and other secrets"
+pkgver="$pkgver"
+files(-,root,bin)
+*
