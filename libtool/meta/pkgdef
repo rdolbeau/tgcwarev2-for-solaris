@@ -1,0 +1,9 @@
+[libtool]
+pkgname="${pkgprefix}${topdir}"
+name="libtool - GNU libtool is a generic library support script"
+pkgcat="application"
+pkgvendor="http://www.gnu.org/software/libtool/"
+shortdesc="GNU libtool is a generic library support script"
+pkgver="$pkgver"
+files(-,root,bin)
+*
