@@ -1,0 +1,9 @@
+[libgcrypt]
+pkgname="${pkgprefix}${topdir}"
+name="libgcrypt - Libgcrypt is a general purpose cryptographic library based on the code from GnuPG"
+pkgcat="application"
+pkgvendor="https://www.gnu.org/software/libgcrypt/"
+shortdesc="Libgcrypt is a general purpose cryptographic library based on the code from GnuPG"
+pkgver="$pkgver"
+files(-,root,bin)
+*
