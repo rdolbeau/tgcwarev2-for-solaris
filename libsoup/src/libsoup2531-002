@@ -1,0 +1,66 @@
+--- libsoup-2.53.1/libsoup/Makefile.in.orig	2015-10-26 13:43:11.000000000 +0000
++++ libsoup-2.53.1/libsoup/Makefile.in	2015-10-28 12:13:25.000000000 +0000
+@@ -143,7 +143,7 @@
+ libsoup_2_4_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+ 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+ 	$(am__DEPENDENCIES_1)
+-am_libsoup_2_4_la_OBJECTS = soup-address.lo soup-auth.lo \
++am_libsoup_2_4_la_OBJECTS = soup-address.lo fake-rfc2553.lo soup-auth.lo \
+ 	soup-auth-basic.lo soup-auth-digest.lo soup-auth-ntlm.lo \
+ 	soup-auth-domain.lo soup-auth-domain-basic.lo \
+ 	soup-auth-domain-digest.lo soup-auth-manager.lo \
+@@ -480,6 +480,7 @@
+ soup_headers = \
+ 	soup.h			\
+ 	soup-address.h		\
++	fake-rfc2553.h		\
+ 	soup-auth.h		\
+ 	soup-auth-domain.h	\
+ 	soup-auth-domain-basic.h  \
+@@ -553,6 +554,7 @@
+ libsoup_2_4_la_SOURCES = \
+ 	gconstructor.h			\
+ 	soup-address.c			\
++	fake-rfc2553.c			\
+ 	soup-auth.c			\
+ 	soup-auth-basic.h		\
+ 	soup-auth-basic.c		\
+@@ -813,6 +815,7 @@
+ 	-rm -f *.tab.c
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/soup-address.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fake-rfc2553.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/soup-auth-basic.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/soup-auth-digest.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/soup-auth-domain-basic.Plo@am__quote@
+--- libsoup-2.53.1/libsoup/soup-address.c.orig	2015-10-23 17:13:45.000000000 +0100
++++ libsoup-2.53.1/libsoup/soup-address.c	2015-10-28 12:25:38.216630000 +0000
+@@ -17,6 +17,8 @@
+ #include "soup.h"
+ #include "soup-misc-private.h"
+ 
++#include "fake-rfc2553.h"
++
+ /**
+  * SECTION:soup-address
+  * @short_description: DNS support
+--- libsoup-2.53.1/libsoup/soup-socket.c.orig	2015-09-27 16:12:02.000000000 +0100
++++ libsoup-2.53.1/libsoup/soup-socket.c	2015-10-28 13:06:48.083928000 +0000
+@@ -1631,7 +1631,7 @@
+ 	g_mutex_lock (&priv->addrlock);
+ 	if (!priv->local_addr) {
+ 		GSocketAddress *addr;
+-		struct sockaddr_storage sa;
++		struct sockaddr sa;
+ 		gssize sa_len;
+ 		GError *error = NULL;
+ 
+@@ -1679,7 +1679,7 @@
+ 	g_mutex_lock (&priv->addrlock);
+ 	if (!priv->remote_addr) {
+ 		GSocketAddress *addr;
+-		struct sockaddr_storage sa;
++		struct sockaddr sa;
+ 		gssize sa_len;
+ 		GError *error = NULL;
+ 

@@ -1,0 +1,8 @@
+--- libsoup-2.53.1/libsoup/tld-parser.py.orig	2015-07-27 18:51:03.000000000 +0100
++++ libsoup-2.53.1/libsoup/tld-parser.py	2015-10-28 11:58:08.750893000 +0000
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python2.7
+ 
+ # Generate tld rules
+ # Copyright (C) 2012 Red Hat, Inc.

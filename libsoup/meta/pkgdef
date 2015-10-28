@@ -1,0 +1,9 @@
+[libsoup]
+pkgname="${pkgprefix}${topdir}"
+name="libsoup - libsoup is an HTTP client/server library for GNOME"
+pkgcat="application"
+pkgvendor="https://wiki.gnome.org/action/show/Projects/libsoup?action=show&redirect=LibSoup"
+shortdesc="libsoup is an HTTP client/server library for GNOME"
+pkgver="$pkgver"
+files(-,root,bin)
+*
