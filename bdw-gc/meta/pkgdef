@@ -1,0 +1,9 @@
+[bdw-gc]
+pkgname="${pkgprefix}${topdir}"
+name="bdw-gc - The Boehm-Demers-Weiser conservative garbage collector"
+pkgcat="application"
+pkgvendor="http://www.hboehm.info/gc/"
+shortdesc="The Boehm-Demers-Weiser conservative garbage collector"
+pkgver="$pkgver"
+files(-,root,bin)
+*
