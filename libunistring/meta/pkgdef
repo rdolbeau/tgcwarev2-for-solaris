@@ -1,0 +1,9 @@
+[libunistring]
+pkgname="${pkgprefix}${topdir}"
+name="libunistring - This library provides functions for manipulating Unicode"
+pkgcat="application"
+pkgvendor="https://www.gnu.org/software/libunistring/"
+shortdesc="This library provides functions for manipulating Unicode"
+pkgver="$pkgver"
+files(-,root,bin)
+*

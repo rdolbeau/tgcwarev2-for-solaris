@@ -1,0 +1,11 @@
+--- libunistring-0.9.5/lib/unistring/stdint.h.orig	2015-10-28 12:39:41.756191000 +0000
++++ libunistring-0.9.5/lib/unistring/stdint.h	2015-10-28 14:11:44.568225000 +0000
+@@ -105,7 +105,7 @@
+ #undef uint8_t
+ typedef signed char unistring_int8_t;
+ typedef unsigned char unistring_uint8_t;
+-#define int8_t unistring_int8_t
++/*#define int8_t unistring_int8_t*/
+ #define uint8_t unistring_uint8_t
+ 
+ #undef int16_t
