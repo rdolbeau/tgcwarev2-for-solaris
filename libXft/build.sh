@@ -6,7 +6,7 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=libXft
-version=2.2.0
+version=2.3.2
 pkgver=1
 source[0]=http://xorg.freedesktop.org/releases/individual/lib/$topdir-$version.tar.gz
 # If there are no patches, simply comment this
