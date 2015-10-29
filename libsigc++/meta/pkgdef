@@ -1,0 +1,9 @@
+[libsigc++]
+pkgname="${pkgprefix}${topdir}"
+name="libsigc++ - libsigc++ implements a typesafe callback system for standard C++"
+pkgcat="application"
+pkgvendor="http://libsigc.sourceforge.net/"
+shortdesc="libsigc++ implements a typesafe callback system for standard C++"
+pkgver="$pkgver"
+files(-,root,bin)
+*
