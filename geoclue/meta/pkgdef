@@ -1,0 +1,9 @@
+[geoclue]
+pkgname="${pkgprefix}${topdir}"
+name="geoclue - Geoclue is a D-Bus service that provides location information"
+pkgcat="application"
+pkgvendor="http://www.freedesktop.org/wiki/Software/GeoClue/"
+shortdesc="Geoclue is a D-Bus service that provides location information"
+pkgver="$pkgver"
+files(-,root,bin)
+*
