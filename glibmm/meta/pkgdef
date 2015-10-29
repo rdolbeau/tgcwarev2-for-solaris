@@ -1,0 +1,9 @@
+[glibmm]
+pkgname="${pkgprefix}${topdir}"
+name="glibmm - glibmm is the official C++ interface for the popular cross-platform library Glib"
+pkgcat="application"
+pkgvendor="https://developer.gnome.org/glibmm/stable/"
+shortdesc="glibmm is the official C++ interface for the popular cross-platform library Glib"
+pkgver="$pkgver"
+files(-,root,bin)
+*
