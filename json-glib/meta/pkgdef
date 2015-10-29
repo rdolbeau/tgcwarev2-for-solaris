@@ -1,0 +1,9 @@
+[json-glib]
+pkgname="${pkgprefix}${topdir}"
+name="json-glib - JSON-GLib is a library providing serialization and deserialization support"
+pkgcat="application"
+pkgvendor="http://live.gnome.org/JsonGlib"
+shortdesc="JSON-GLib is a library providing serialization and deserialization support"
+pkgver="$pkgver"
+files(-,root,bin)
+*
