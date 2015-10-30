@@ -1,0 +1,9 @@
+[dbus-glib]
+pkgname="${pkgprefix}${topdir}"
+name="dbus-glib - DBus-GLib is an obsolete dbus-glib bindings"
+pkgcat="application"
+pkgvendor="http://www.freedesktop.org/wiki/Software/DBusBindings/"
+shortdesc="DBus-GLib is an obsolete dbus-glib bindings"
+pkgver="$pkgver"
+files(-,root,bin)
+*
