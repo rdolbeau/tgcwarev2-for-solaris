@@ -1,0 +1,123 @@
+--- dbus-1.8.20/dbus/Makefile.in.orig	2015-10-30 10:24:44.798398000 +0000
++++ dbus-1.8.20/dbus/Makefile.in	2015-10-30 10:44:38.898506000 +0000
+@@ -179,7 +179,7 @@
+ 	dbus-mempool.h dbus-pipe.c dbus-pipe.h dbus-string.c \
+ 	dbus-string.h dbus-string-private.h dbus-server-launchd.h \
+ 	dbus-server-launchd.c dbus-file-unix.c dbus-pipe-unix.c \
+-	dbus-sysdeps-unix.c dbus-sysdeps-unix.h dbus-sysdeps-pthread.c \
++	dbus-sysdeps-unix.c dbus-sysdeps-unix.h fake-rfc2553.c fake-rfc2553.h dbus-sysdeps-pthread.c \
+ 	dbus-transport-unix.c dbus-transport-unix.h dbus-userdb.c \
+ 	dbus-userdb.h sd-daemon.c sd-daemon.h \
+ 	dbus-sysdeps-wince-glue.h dbus-sysdeps-wince-glue.c \
+@@ -216,6 +216,7 @@
+ @DBUS_WIN_FALSE@	libdbus_1_la-dbus-file-unix.lo \
+ @DBUS_WIN_FALSE@	libdbus_1_la-dbus-pipe-unix.lo \
+ @DBUS_WIN_FALSE@	libdbus_1_la-dbus-sysdeps-unix.lo \
++@DBUS_WIN_FALSE@	libdbus_1_la-fake-rfc2553.lo \
+ @DBUS_WIN_FALSE@	libdbus_1_la-dbus-sysdeps-pthread.lo \
+ @DBUS_WIN_FALSE@	libdbus_1_la-dbus-transport-unix.lo \
+ @DBUS_WIN_FALSE@	libdbus_1_la-dbus-userdb.lo \
+@@ -277,7 +278,7 @@
+ 	dbus-mempool.h dbus-pipe.c dbus-pipe.h dbus-string.c \
+ 	dbus-string.h dbus-string-private.h dbus-server-launchd.h \
+ 	dbus-server-launchd.c dbus-file-unix.c dbus-pipe-unix.c \
+-	dbus-sysdeps-unix.c dbus-sysdeps-unix.h dbus-sysdeps-pthread.c \
++	dbus-sysdeps-unix.c dbus-sysdeps-unix.h fake-rfc2553.c fake-rfc2553.h dbus-sysdeps-pthread.c \
+ 	dbus-transport-unix.c dbus-transport-unix.h dbus-userdb.c \
+ 	dbus-userdb.h sd-daemon.c sd-daemon.h \
+ 	dbus-sysdeps-wince-glue.h dbus-sysdeps-wince-glue.c \
+@@ -333,6 +334,7 @@
+ @DBUS_WIN_FALSE@	libdbus_internal_la-dbus-file-unix.lo \
+ @DBUS_WIN_FALSE@	libdbus_internal_la-dbus-pipe-unix.lo \
+ @DBUS_WIN_FALSE@	libdbus_internal_la-dbus-sysdeps-unix.lo \
++@DBUS_WIN_FALSE@	libdbus_internal_la-fake-rfc2553.lo \
+ @DBUS_WIN_FALSE@	libdbus_internal_la-dbus-sysdeps-pthread.lo \
+ @DBUS_WIN_FALSE@	libdbus_internal_la-dbus-transport-unix.lo \
+ @DBUS_WIN_FALSE@	libdbus_internal_la-dbus-userdb.lo \
+@@ -731,7 +733,9 @@
+ @DBUS_WIN_FALSE@	dbus-file-unix.c 			\
+ @DBUS_WIN_FALSE@	dbus-pipe-unix.c 			\
+ @DBUS_WIN_FALSE@	dbus-sysdeps-unix.c 			\
++@DBUS_WIN_FALSE@	fake-rfc25353.c				\
+ @DBUS_WIN_FALSE@	dbus-sysdeps-unix.h			\
++@DBUS_WIN_FALSE@	fake-rfc25353.h				\
+ @DBUS_WIN_FALSE@	dbus-sysdeps-pthread.c			\
+ @DBUS_WIN_FALSE@	dbus-transport-unix.c			\
+ @DBUS_WIN_FALSE@	dbus-transport-unix.h			\
+@@ -1097,6 +1101,7 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-sysdeps-pthread.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-sysdeps-thread-win.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-sysdeps-unix.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-fake-rfc2553.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-sysdeps-win.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-sysdeps-wince-glue.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-sysdeps.Plo@am__quote@
+@@ -1170,6 +1175,7 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-sysdeps-pthread.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-sysdeps-thread-win.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-sysdeps-unix.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-fake-rfc2553.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-sysdeps-util-unix.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-sysdeps-util-win.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-sysdeps-util.Plo@am__quote@
+@@ -1525,6 +1531,13 @@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-sysdeps-unix.lo `test -f 'dbus-sysdeps-unix.c' || echo '$(srcdir)/'`dbus-sysdeps-unix.c
+ 
++libdbus_1_la-fake-rfc2553.lo: fake-rfc2553.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-fake-rfc2553.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-fake-rfc2553.Tpo -c -o libdbus_1_la-fake-rfc2553.lo `test -f 'fake-rfc2553.c' || echo '$(srcdir)/'`fake-rfc2553.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-fake-rfc2553.Tpo $(DEPDIR)/libdbus_1_la-fake-rfc2553.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fake-rfc2553.c' object='libdbus_1_la-fake-rfc2553.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c-o libdbus_1_la-fake-rfc2553.lo `test -f 'fake-rfc2553.c' || echo '$(srcdir)/'`fake-rfc2553.c
++
+ libdbus_1_la-dbus-sysdeps-pthread.lo: dbus-sysdeps-pthread.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-dbus-sysdeps-pthread.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-dbus-sysdeps-pthread.Tpo -c -o libdbus_1_la-dbus-sysdeps-pthread.lo `test -f 'dbus-sysdeps-pthread.c' || echo '$(srcdir)/'`dbus-sysdeps-pthread.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-dbus-sysdeps-pthread.Tpo $(DEPDIR)/libdbus_1_la-dbus-sysdeps-pthread.Plo
+@@ -1917,6 +1930,13 @@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_internal_la-dbus-sysdeps-unix.lo `test -f 'dbus-sysdeps-unix.c' || echo '$(srcdir)/'`dbus-sysdeps-unix.c
+ 
++libdbus_internal_la-fake-rfc2553.lo: fake-rfc2553.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_internal_la-fake-rfc2553.lo -MD -MP -MF $(DEPDIR)/libdbus_internal_la-fake-rfc2553.Tpo -c -o libdbus_internal_la-fake-rfc2553.lo `test -f 'fake-rfc2553.c' || echo '$(srcdir)/'`fake-rfc2553.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-fake-rfc2553.Tpo $(DEPDIR)/libdbus_internal_la-fake-rfc2553.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fake-rfc2553.c' object='libdbus_internal_la-fake-rfc2553.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@       DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_internal_la-fake-rfc2553.lo `test -f 'fake-rfc2553.c' || echo '$(srcdir)/'`dbus-sysdeps-unix.c
++
+ libdbus_internal_la-dbus-sysdeps-pthread.lo: dbus-sysdeps-pthread.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_internal_la-dbus-sysdeps-pthread.lo -MD -MP -MF $(DEPDIR)/libdbus_internal_la-dbus-sysdeps-pthread.Tpo -c -o libdbus_internal_la-dbus-sysdeps-pthread.lo `test -f 'dbus-sysdeps-pthread.c' || echo '$(srcdir)/'`dbus-sysdeps-pthread.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-dbus-sysdeps-pthread.Tpo $(DEPDIR)/libdbus_internal_la-dbus-sysdeps-pthread.Plo
+--- dbus-1.8.20/dbus/dbus-sysdeps-unix.c.orig	2015-05-14 13:23:25.000000000 +0100
++++ dbus-1.8.20/dbus/dbus-sysdeps-unix.c	2015-10-30 13:27:05.762697000 +0000
+@@ -86,6 +86,8 @@
+ #include <pthread.h>
+ #endif
+ 
++#include "fake-rfc2553.h"
++
+ #ifndef O_BINARY
+ #define O_BINARY 0
+ #endif
+@@ -98,6 +100,10 @@
+ #define socklen_t int
+ #endif
+ 
++const char *inet_ntop(int af, const void *src, char *dst, socklen_t size) {
++	char *temp = inet_ntoa(*(struct in_addr*)src);memcpy(dst,temp,16);return dst;
++}
++
+ #if defined (__sun) || defined (__sun__)
+ /*
+  * CMS_SPACE etc. definitions for Solaris < 10, based on
+--- dbus-1.8.20/dbus/sd-daemon.c.orig	2015-05-14 13:23:25.000000000 +0100
++++ dbus-1.8.20/dbus/sd-daemon.c	2015-10-30 12:44:25.943132000 +0000
+@@ -49,6 +49,8 @@
+ 
+ #include "sd-daemon.h"
+ 
++#include "fake-rfc2553.h"
++
+ #if (__GNUC__ >= 4)
+ #  ifdef SD_EXPORT_SYMBOLS
+ /* Export symbols */

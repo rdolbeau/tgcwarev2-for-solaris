@@ -1,0 +1,524 @@
+--- /dev/null	2015-10-30 09:17:39.000000000 +0000
++++ dbus-1.8.20/dbus/fake-rfc2553.c	2015-10-30 09:49:59.251809000 +0000
+@@ -0,0 +1,231 @@
++/*
++ * Copyright (C) 2000-2003 Damien Miller.  All rights reserved.
++ * Copyright (C) 1999 WIDE Project.  All rights reserved.
++ * 
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions
++ * are met:
++ * 1. Redistributions of source code must retain the above copyright
++ *    notice, this list of conditions and the following disclaimer.
++ * 2. Redistributions in binary form must reproduce the above copyright
++ *    notice, this list of conditions and the following disclaimer in the
++ *    documentation and/or other materials provided with the distribution.
++ * 3. Neither the name of the project nor the names of its contributors
++ *    may be used to endorse or promote products derived from this software
++ *    without specific prior written permission.
++ * 
++ * THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS ``AS IS'' AND
++ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
++ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
++ * ARE DISCLAIMED.  IN NO EVENT SHALL THE PROJECT OR CONTRIBUTORS BE LIABLE
++ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
++ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
++ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
++ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
++ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
++ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
++ * SUCH DAMAGE.
++ */
++
++/*
++ * Pseudo-implementation of RFC2553 name / address resolution functions
++ *
++ * But these functions are not implemented correctly. The minimum subset
++ * is implemented for ssh use only. For example, this routine assumes
++ * that ai_family is AF_INET. Don't use it for another purpose.
++ */
++
++#include <stdlib.h>
++#include <string.h>
++
++#include <netinet/in.h>
++#include <arpa/inet.h>
++
++#include "fake-rfc2553.h"
++
++#ifndef HAVE_GETNAMEINFO
++int getnameinfo(const struct sockaddr *sa, size_t salen, char *host, 
++                size_t hostlen, char *serv, size_t servlen, int flags)
++{
++	struct sockaddr_in *sin = (struct sockaddr_in *)sa;
++	struct hostent *hp;
++	char tmpserv[16];
++
++	if (serv != NULL) {
++		snprintf(tmpserv, sizeof(tmpserv), "%d", ntohs(sin->sin_port));
++		if (strncpy(serv, tmpserv, servlen) >= servlen)
++			return (EAI_MEMORY);
++	}
++
++	if (host != NULL) {
++		if (flags & NI_NUMERICHOST) {
++			if (strncpy(host, inet_ntoa(sin->sin_addr),
++			    hostlen) >= hostlen)
++				return (EAI_MEMORY);
++			else
++				return (0);
++		} else {
++			hp = gethostbyaddr((char *)&sin->sin_addr, 
++			    sizeof(struct in_addr), AF_INET);
++			if (hp == NULL)
++				return (EAI_NODATA);
++			
++			if (strncpy(host, hp->h_name, hostlen) >= hostlen)
++				return (EAI_MEMORY);
++			else
++				return (0);
++		}
++	}
++	return (0);
++}
++#endif /* !HAVE_GETNAMEINFO */
++
++#ifndef HAVE_GAI_STRERROR
++#ifdef HAVE_CONST_GAI_STRERROR_PROTO
++const char *
++#else
++char *
++#endif
++gai_strerror(int err)
++{
++	switch (err) {
++	case EAI_NODATA:
++		return ("no address associated with name");
++	case EAI_MEMORY:
++		return ("memory allocation failure.");
++	case EAI_NONAME:
++		return ("nodename nor servname provided, or not known");
++	default:
++		return ("unknown/invalid error.");
++	}
++}    
++#endif /* !HAVE_GAI_STRERROR */
++
++#ifndef HAVE_FREEADDRINFO
++void
++freeaddrinfo(struct addrinfo *ai)
++{
++	struct addrinfo *next;
++
++	for(; ai != NULL;) {
++		next = ai->ai_next;
++		free(ai);
++		ai = next;
++	}
++}
++#endif /* !HAVE_FREEADDRINFO */
++
++#ifndef HAVE_GETADDRINFO
++static struct
++addrinfo *malloc_ai(int port, u_long addr, const struct addrinfo *hints)
++{
++	struct addrinfo *ai;
++
++	ai = malloc(sizeof(*ai) + sizeof(struct sockaddr_in));
++	if (ai == NULL)
++		return (NULL);
++	
++	memset(ai, '\0', sizeof(*ai) + sizeof(struct sockaddr_in));
++	
++	ai->ai_addr = (struct sockaddr *)(ai + 1);
++	/* XXX -- ssh doesn't use sa_len */
++	ai->ai_addrlen = sizeof(struct sockaddr_in);
++	ai->ai_addr->sa_family = ai->ai_family = AF_INET;
++
++	((struct sockaddr_in *)(ai)->ai_addr)->sin_port = port;
++	((struct sockaddr_in *)(ai)->ai_addr)->sin_addr.s_addr = addr;
++	
++	/* XXX: the following is not generally correct, but does what we want */
++	if (hints->ai_socktype)
++		ai->ai_socktype = hints->ai_socktype;
++	else
++		ai->ai_socktype = SOCK_STREAM;
++
++	if (hints->ai_protocol)
++		ai->ai_protocol = hints->ai_protocol;
++
++	return (ai);
++}
++
++int
++getaddrinfo(const char *hostname, const char *servname, 
++    const struct addrinfo *hints, struct addrinfo **res)
++{
++	struct hostent *hp;
++	struct servent *sp;
++	struct in_addr in;
++	int i;
++	long int port;
++	u_long addr;
++
++	port = 0;
++	if (servname != NULL) {
++		char *cp;
++
++		port = strtol(servname, &cp, 10);
++		if (port > 0 && port <= 65535 && *cp == '\0')
++			port = htons(port);
++		else if ((sp = getservbyname(servname, NULL)) != NULL)
++			port = sp->s_port;
++		else
++			port = 0;
++	}
++
++	if (hints && hints->ai_flags & AI_PASSIVE) {
++		addr = htonl(0x00000000);
++		if (hostname && inet_aton(hostname, &in) != 0)
++			addr = in.s_addr;
++		*res = malloc_ai(port, addr, hints);
++		if (*res == NULL) 
++			return (EAI_MEMORY);
++		return (0);
++	}
++		
++	if (!hostname) {
++		*res = malloc_ai(port, htonl(0x7f000001), hints);
++		if (*res == NULL) 
++			return (EAI_MEMORY);
++		return (0);
++	}
++	
++	if (inet_aton(hostname, &in)) {
++		*res = malloc_ai(port, in.s_addr, hints);
++		if (*res == NULL) 
++			return (EAI_MEMORY);
++		return (0);
++	}
++	
++	/* Don't try DNS if AI_NUMERICHOST is set */
++	if (hints && hints->ai_flags & AI_NUMERICHOST)
++		return (EAI_NONAME);
++	
++	hp = gethostbyname(hostname);
++	if (hp && hp->h_name && hp->h_name[0] && hp->h_addr_list[0]) {
++		struct addrinfo *cur, *prev;
++
++		cur = prev = *res = NULL;
++		for (i = 0; hp->h_addr_list[i]; i++) {
++			struct in_addr *in = (struct in_addr *)hp->h_addr_list[i];
++
++			cur = malloc_ai(port, in->s_addr, hints);
++			if (cur == NULL) {
++				if (*res != NULL)
++					freeaddrinfo(*res);
++				return (EAI_MEMORY);
++			}
++			if (prev)
++				prev->ai_next = cur;
++			else
++				*res = cur;
++
++			prev = cur;
++		}
++		return (0);
++	}
++	
++	return (EAI_NODATA);
++}
++
++const struct in6_addr in6addr_any = IN6ADDR_ANY_INIT;
++const struct in6_addr in6addr_loopback = IN6ADDR_LOOPBACK_INIT;
++#endif /* !HAVE_GETADDRINFO */
+--- /dev/null	2015-10-30 09:17:39.000000000 +0000
++++ dbus-1.8.20/dbus/fake-rfc2553.h	2015-10-30 09:49:59.281809000 +0000
+@@ -0,0 +1,287 @@
++/* $Id: fake-rfc2553.h,v 1.13 2006/07/24 03:51:52 djm Exp $ */
++
++/*
++ * Copyright (C) 2000-2003 Damien Miller.  All rights reserved.
++ * Copyright (C) 1999 WIDE Project.  All rights reserved.
++ * 
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions
++ * are met:
++ * 1. Redistributions of source code must retain the above copyright
++ *    notice, this list of conditions and the following disclaimer.
++ * 2. Redistributions in binary form must reproduce the above copyright
++ *    notice, this list of conditions and the following disclaimer in the
++ *    documentation and/or other materials provided with the distribution.
++ * 3. Neither the name of the project nor the names of its contributors
++ *    may be used to endorse or promote products derived from this software
++ *    without specific prior written permission.
++ * 
++ * THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS ``AS IS'' AND
++ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
++ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
++ * ARE DISCLAIMED.  IN NO EVENT SHALL THE PROJECT OR CONTRIBUTORS BE LIABLE
++ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
++ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
++ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
++ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
++ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
++ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
++ * SUCH DAMAGE.
++ */
++
++/*
++ * Pseudo-implementation of RFC2553 name / address resolution functions
++ *
++ * But these functions are not implemented correctly. The minimum subset
++ * is implemented for ssh use only. For example, this routine assumes
++ * that ai_family is AF_INET. Don't use it for another purpose.
++ */
++
++#ifndef _FAKE_RFC2553_H
++#define _FAKE_RFC2553_H
++
++#include <sys/types.h>
++#include <stdlib.h>
++#include <stdio.h>
++#include <sys/socket.h>
++#include <limits.h>
++#include <netdb.h>
++
++
++/*
++ * First, socket and INET6 related definitions 
++ */
++#ifndef HAVE_STRUCT_SOCKADDR_STORAGE
++# define	_SS_MAXSIZE	128	/* Implementation specific max size */
++# define       _SS_PADSIZE     (_SS_MAXSIZE - sizeof (struct sockaddr))
++struct sockaddr_storage {
++	struct sockaddr	ss_sa;
++	char		__ss_pad2[_SS_PADSIZE];
++};
++# define ss_family ss_sa.sa_family
++#endif /* !HAVE_STRUCT_SOCKADDR_STORAGE */
++
++#ifndef IN6_IS_ADDR_LOOPBACK
++# define IN6_IS_ADDR_LOOPBACK(a) \
++	(((uint32_t *)(a))[0] == 0 && ((uint32_t *)(a))[1] == 0 && \
++	 ((uint32_t *)(a))[2] == 0 && ((uint32_t *)(a))[3] == htonl(1))
++#endif /* !IN6_IS_ADDR_LOOPBACK */
++
++#ifndef HAVE_STRUCT_IN6_ADDR
++struct in6_addr {
++	uint8_t	s6_addr[16];
++};
++#endif /* !HAVE_STRUCT_IN6_ADDR */
++
++#ifndef HAVE_STRUCT_SOCKADDR_IN6
++struct sockaddr_in6 {
++	unsigned short	sin6_family;
++	uint16_t	sin6_port;
++	uint32_t	sin6_flowinfo;
++	struct in6_addr	sin6_addr;
++	uint32_t	sin6_scope_id;
++};
++#endif /* !HAVE_STRUCT_SOCKADDR_IN6 */
++
++#ifndef AF_INET6
++/* Define it to something that should never appear */
++#define AF_INET6 AF_MAX
++#endif
++
++/*
++ * Next, RFC2553 name / address resolution API
++ */
++
++#ifndef NI_NUMERICHOST
++# define NI_NUMERICHOST    (1)
++#endif
++#ifndef NI_NAMEREQD
++# define NI_NAMEREQD       (1<<1)
++#endif
++#ifndef NI_NUMERICSERV
++# define NI_NUMERICSERV    (1<<2)
++#endif
++
++#ifndef AI_PASSIVE
++# define AI_PASSIVE		(1)
++#endif
++#ifndef AI_CANONNAME
++# define AI_CANONNAME		(1<<1)
++#endif
++#ifndef AI_NUMERICHOST
++# define AI_NUMERICHOST		(1<<2)
++#endif
++
++#ifndef NI_MAXSERV
++# define NI_MAXSERV 32
++#endif /* !NI_MAXSERV */
++#ifndef NI_MAXHOST
++# define NI_MAXHOST 1025
++#endif /* !NI_MAXHOST */
++
++#ifndef EAI_NODATA
++# define EAI_NODATA	(INT_MAX - 1)
++#endif
++#ifndef EAI_MEMORY
++# define EAI_MEMORY	(INT_MAX - 2)
++#endif
++#ifndef EAI_NONAME
++# define EAI_NONAME	(INT_MAX - 3)
++#endif
++#ifndef EAI_SYSTEM
++# define EAI_SYSTEM	(INT_MAX - 4)
++#endif
++
++
++# define EAI_AGAIN        -3    /* Temporary failure in name resolution.  */
++# define EAI_FAIL         -4    /* Non-recoverable failure in name res.  */
++
++
++#ifndef HAVE_STRUCT_ADDRINFO
++struct addrinfo {
++	int	ai_flags;	/* AI_PASSIVE, AI_CANONNAME */
++	int	ai_family;	/* PF_xxx */
++	int	ai_socktype;	/* SOCK_xxx */
++	int	ai_protocol;	/* 0 or IPPROTO_xxx for IPv4 and IPv6 */
++	size_t	ai_addrlen;	/* length of ai_addr */
++	char	*ai_canonname;	/* canonical name for hostname */
++	struct sockaddr *ai_addr;	/* binary address */
++	struct addrinfo *ai_next;	/* next structure in linked list */
++};
++#endif /* !HAVE_STRUCT_ADDRINFO */
++
++#ifndef HAVE_GETADDRINFO
++#ifdef getaddrinfo
++# undef getaddrinfo
++#endif
++#define getaddrinfo(a,b,c,d)	(ssh_getaddrinfo(a,b,c,d))
++int getaddrinfo(const char *, const char *, 
++    const struct addrinfo *, struct addrinfo **);
++#endif /* !HAVE_GETADDRINFO */
++
++#if !defined(HAVE_GAI_STRERROR) && !defined(HAVE_CONST_GAI_STRERROR_PROTO)
++#define gai_strerror(a)		(ssh_gai_strerror(a))
++char *gai_strerror(int);
++#endif /* !HAVE_GAI_STRERROR */
++
++#ifndef HAVE_FREEADDRINFO
++#define freeaddrinfo(a)		(ssh_freeaddrinfo(a))
++void freeaddrinfo(struct addrinfo *);
++#endif /* !HAVE_FREEADDRINFO */
++
++#ifndef HAVE_GETNAMEINFO
++#define getnameinfo(a,b,c,d,e,f,g) (ssh_getnameinfo(a,b,c,d,e,f,g))
++int getnameinfo(const struct sockaddr *, size_t, char *, size_t, 
++    char *, size_t, int);
++#endif /* !HAVE_GETNAMEINFO */
++
++
++extern const struct in6_addr in6addr_any;        /* :: */
++extern const struct in6_addr in6addr_loopback;   /* ::1 */
++#define IN6ADDR_ANY_INIT { { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 } } }
++#define IN6ADDR_LOOPBACK_INIT { { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 } } }
++
++#ifndef INET_ADDRSTRLEN
++#define INET_ADDRSTRLEN 16
++#endif
++#define INET6_ADDRSTRLEN 46
++
++# define ntohl(x)       (x)
++# define ntohs(x)       (x)
++# define htonl(x)       (x)
++# define htons(x)       (x)
++
++#define IN6_IS_ADDR_UNSPECIFIED(a) \
++        (((__const uint32_t *) (a))[0] == 0                                   \
++         && ((__const uint32_t *) (a))[1] == 0                                \
++         && ((__const uint32_t *) (a))[2] == 0                                \
++         && ((__const uint32_t *) (a))[3] == 0)
++
++#define IN6_IS_ADDR_MULTICAST(a) (((__const uint8_t *) (a))[0] == 0xff)
++
++#define IN6_IS_ADDR_LINKLOCAL(a) \
++        ((((__const uint32_t *) (a))[0] & htonl (0xffc00000))                 \
++         == htonl (0xfe800000))
++
++#define IN6_IS_ADDR_SITELOCAL(a) \
++        ((((__const uint32_t *) (a))[0] & htonl (0xffc00000))                 \
++         == htonl (0xfec00000))
++
++#define IN6_IS_ADDR_V4MAPPED(a) \
++        ((((__const uint32_t *) (a))[0] == 0)                                 \
++         && (((__const uint32_t *) (a))[1] == 0)                              \
++         && (((__const uint32_t *) (a))[2] == htonl (0xffff)))
++
++#define IN6_IS_ADDR_V4COMPAT(a) \
++        ((((__const uint32_t *) (a))[0] == 0)                                 \
++         && (((__const uint32_t *) (a))[1] == 0)                              \
++         && (((__const uint32_t *) (a))[2] == 0)                              \
++         && (ntohl (((__const uint32_t *) (a))[3]) > 1))
++
++#define IN6_ARE_ADDR_EQUAL(a,b) \
++        ((((__const uint32_t *) (a))[0] == ((__const uint32_t *) (b))[0])     \
++         && (((__const uint32_t *) (a))[1] == ((__const uint32_t *) (b))[1])  \
++         && (((__const uint32_t *) (a))[2] == ((__const uint32_t *) (b))[2])  \
++         && (((__const uint32_t *) (a))[3] == ((__const uint32_t *) (b))[3]))
++
++#define IN6_IS_ADDR_MC_NODELOCAL(a) \
++        (IN6_IS_ADDR_MULTICAST(a)                                             \
++         && ((((__const uint8_t *) (a))[1] & 0xf) == 0x1))
++
++#define IN6_IS_ADDR_MC_LINKLOCAL(a) \
++        (IN6_IS_ADDR_MULTICAST(a)                                             \
++         && ((((__const uint8_t *) (a))[1] & 0xf) == 0x2))
++
++#define IN6_IS_ADDR_MC_SITELOCAL(a) \
++        (IN6_IS_ADDR_MULTICAST(a)                                             \
++         && ((((__const uint8_t *) (a))[1] & 0xf) == 0x5))
++
++#define IN6_IS_ADDR_MC_ORGLOCAL(a) \
++        (IN6_IS_ADDR_MULTICAST(a)                                             \
++         && ((((__const uint8_t *) (a))[1] & 0xf) == 0x8))
++
++#define IN6_IS_ADDR_MC_GLOBAL(a) \
++        (IN6_IS_ADDR_MULTICAST(a)                                             \
++         && ((((__const uint8_t *) (a))[1] & 0xf) == 0xe))
++
++struct ipv6_mreq
++  {
++    /* IPv6 multicast address of group */
++    struct in6_addr ipv6mr_multiaddr;
++
++    /* local interface */
++    unsigned int ipv6mr_interface;
++  };
++
++
++#define IPPROTO_IPV6 41
++#define IPV6_ADDRFORM           1
++#define IPV6_2292PKTINFO        2
++#define IPV6_2292HOPOPTS        3
++#define IPV6_2292DSTOPTS        4
++#define IPV6_2292RTHDR          5
++#define IPV6_2292PKTOPTIONS     6
++#define IPV6_CHECKSUM           7
++#define IPV6_2292HOPLIMIT       8
++#define IPV6_NEXTHOP            9
++#define IPV6_AUTHHDR            10      /* obsolete */
++#define IPV6_FLOWINFO           11
++#define IPV6_UNICAST_HOPS       16
++#define IPV6_MULTICAST_IF       17
++#define IPV6_MULTICAST_HOPS     18
++#define IPV6_MULTICAST_LOOP     19
++#define IPV6_ADD_MEMBERSHIP     20
++#define IPV6_DROP_MEMBERSHIP    21
++#define IPV6_ROUTER_ALERT       22
++#define IPV6_MTU_DISCOVER       23
++#define IPV6_MTU                24
++#define IPV6_RECVERR            25
++#define IPV6_V6ONLY             26
++#define IPV6_JOIN_ANYCAST       27
++#define IPV6_LEAVE_ANYCAST      28
++
++#define IPV6_JOIN_GROUP         20
++#define IPV6_LEAVE_GROUP        21
++
++#endif /* !_FAKE_RFC2553_H */
++

@@ -1,0 +1,9 @@
+[dbus]
+pkgname="${pkgprefix}${topdir}"
+name="dbus - D-Bus is a message bus system"
+pkgcat="application"
+pkgvendor="http://www.freedesktop.org/wiki/Software/dbus/"
+shortdesc="D-Bus is a message bus system"
+pkgver="$pkgver"
+files(-,root,bin)
+*
