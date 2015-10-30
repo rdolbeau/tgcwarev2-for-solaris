@@ -1,0 +1,9 @@
+[libIDL]
+pkgname="${pkgprefix}${topdir}"
+name="libIDL - libIDL is a library for creating trees of CORBA Interface Definition Language files"
+pkgcat="application"
+pkgvendor="http://ftp.gnome.org/pub/gnome/sources/libIDL/"
+shortdesc="libIDL is a library for creating trees of CORBA Interface Definition Language files"
+pkgver="$pkgver"
+files(-,root,bin)
+*
