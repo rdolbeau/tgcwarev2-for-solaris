@@ -1,0 +1,9 @@
+[guile]
+pkgname="${pkgprefix}${topdir}"
+name="guile - Guile is the GNU Ubiquitous Intelligent Language for Extensions"
+pkgcat="application"
+pkgvendor="http://www.gnu.org/software/guile/"
+shortdesc="Guile is the GNU Ubiquitous Intelligent Language for Extensions"
+pkgver="$pkgver"
+files(-,root,bin)
+*

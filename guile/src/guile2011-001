@@ -1,0 +1,13 @@
+--- guile-2.0.11/libguile/net_db.c.orig	2013-03-25 21:44:46.000000000 +0000
++++ guile-2.0.11/libguile/net_db.c	2015-10-29 10:33:01.706572000 +0000
+@@ -445,6 +445,10 @@
+ 
+ /* Protocol-independent name resolution with getaddrinfo(3) & co.  */
+ 
++# define AI_PASSIVE     0x0001  /* Socket address is intended for `bind'.  */
++# define AI_CANONNAME   0x0002  /* Request for canonical name.  */
++# define AI_NUMERICHOST 0x0004  /* Don't use name resolution.  */
++
+ SCM_SYMBOL (sym_getaddrinfo_error, "getaddrinfo-error");
+ 
+ /* Make sure the `AI_*' flags can be stored as INUMs.  */

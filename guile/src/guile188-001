@@ -1,0 +1,29 @@
+--- guile-1.8.8/configure.orig	2010-12-13 19:29:32.000000000 +0000
++++ guile-1.8.8/configure	2015-10-30 15:28:04.239784000 +0000
+@@ -18628,26 +18628,6 @@
+ # macros from <math.h>.  Plain AC_CHECK_FUNCS is insufficient, it doesn't
+ # use <math.h> so doesn't detect on macro-only systems like HP-UX.
+ #
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for isinf" >&5
+-$as_echo_n "checking for isinf... " >&6; }
+-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+-/* end confdefs.h.  */
+-#include <math.h>
+-volatile double x = 0.0;
+-int main () { return (isinf(x) != 0); }
+-_ACEOF
+-if ac_fn_c_try_link "$LINENO"; then :
+-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+-$as_echo "yes" >&6; }
+-
+-$as_echo "#define HAVE_ISINF 1" >>confdefs.h
+-
+-else
+-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+-$as_echo "no" >&6; }
+-fi
+-rm -f core conftest.err conftest.$ac_objext \
+-    conftest$ac_exeext conftest.$ac_ext
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for isnan" >&5
+ $as_echo_n "checking for isnan... " >&6; }
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext

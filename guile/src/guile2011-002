@@ -1,0 +1,18 @@
+--- guile-2.0.11/libguile/gc.c.orig	2014-02-28 20:01:27.000000000 +0000
++++ guile-2.0.11/libguile/gc.c	2015-10-29 12:30:21.586240000 +0000
+@@ -33,6 +33,15 @@
+ #include <stdlib.h>
+ #include <math.h>
+ 
++static inline long int
++lround (double x)
++{
++  if (x >= 0)
++    return floor (x + 0.5);
++  else
++    return ceil (x - 0.5);
++}
++
+ #ifdef __ia64__
+ #include <ucontext.h>
+ extern unsigned long * __libc_ia64_register_backing_store_base;
