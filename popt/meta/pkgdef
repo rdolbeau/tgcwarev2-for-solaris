@@ -1,0 +1,9 @@
+[popt]
+pkgname="${pkgprefix}${topdir}"
+name="popt - popt is used by some programs to parse command-line options"
+pkgcat="application"
+pkgvendor="http://www.linuxfromscratch.org/blfs/view/svn/general/popt.html"
+shortdesc="popt is used by some programs to parse command-line options"
+pkgver="$pkgver"
+files(-,root,bin)
+*
