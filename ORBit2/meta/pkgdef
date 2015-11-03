@@ -1,0 +1,9 @@
+[ORBit2]
+pkgname="${pkgprefix}${topdir}"
+name="ORBit2 - ORBit2 is a CORBA 2.4-compliant Object Request Broker"
+pkgcat="application"
+pkgvendor="https://projects.gnome.org/ORBit2/"
+shortdesc="ORBit2 is a CORBA 2.4-compliant Object Request Broker"
+pkgver="$pkgver"
+files(-,root,bin)
+*

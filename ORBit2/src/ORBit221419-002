@@ -1,0 +1,29 @@
+--- ORBit2-2.14.19/linc2/src/linc-protocols.c.orig	2010-02-09 12:05:35.000000000 +0000
++++ ORBit2-2.14.19/linc2/src/linc-protocols.c	2015-11-03 10:01:36.892154000 +0000
+@@ -139,6 +139,7 @@
+ 
+ #if defined(AF_INET) || defined(AF_INET6) || defined (AF_UNIX)
+ 
++#if 0
+ #ifndef G_OS_WIN32
+ static void
+ get_first_non_local_ipaddr(char *buf, 
+@@ -179,6 +180,7 @@
+ 		close(sock);
+ }
+ #endif
++#endif
+ 
+ static char *
+ get_netid(LinkNetIdType which, 
+@@ -198,8 +200,10 @@
+ #ifndef G_OS_WIN32
+ 		if (fixed_host_net_id) 
+ 			strncpy(buf, fixed_host_net_id, len);
++#if 0
+ 		else
+ 			get_first_non_local_ipaddr(buf, len);
++#endif
+ 		if ('\0' == *buf)
+ 			strncpy(buf, "127.0.0.1", len);
+ 
