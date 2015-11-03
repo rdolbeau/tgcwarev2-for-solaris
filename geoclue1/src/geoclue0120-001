@@ -1,0 +1,11 @@
+--- geoclue-0.12.0/configure.orig	2010-03-25 21:41:36.000000000 +0000
++++ geoclue-0.12.0/configure	2015-11-03 13:19:16.879193000 +0000
+@@ -11314,7 +11314,7 @@
+ _ACEOF
+ 
+ 
+-CFLAGS="$CFLAGS -g -Wall -Werror -Wno-format"
++CFLAGS="$CFLAGS -g -Wall -Wno-format"
+ 
+ # -----------------------------------------------------------
+ # gtk+

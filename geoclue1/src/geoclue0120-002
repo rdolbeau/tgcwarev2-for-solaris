@@ -1,0 +1,10 @@
+--- geoclue-0.12.0/providers/skyhook/Makefile.in.orig	2010-03-25 21:41:35.000000000 +0000
++++ geoclue-0.12.0/providers/skyhook/Makefile.in	2015-11-03 13:46:19.904224000 +0000
+@@ -250,6 +250,7 @@
+ geoclue_skyhook_LDADD = \
+ 	$(GEOCLUE_LIBS) \
+ 	$(SKYHOOK_LIBS) \
++	-lgthread-2.0	\
+ 	$(top_builddir)/geoclue/libgeoclue.la 
+ 
+ providersdir = $(datadir)/geoclue-providers
