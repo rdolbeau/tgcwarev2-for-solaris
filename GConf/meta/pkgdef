@@ -1,0 +1,9 @@
+[GConf]
+pkgname="${pkgprefix}${topdir}"
+name="GConf - ftp://ftp.gnome.org/pub/GNOME/sources/GConf/2.32/GConf-2.32.4.tar.xz"
+pkgcat="application"
+pkgvendor="https://projects.gnome.org/gconf/"
+shortdesc="ftp://ftp.gnome.org/pub/GNOME/sources/GConf/2.32/GConf-2.32.4.tar.xz"
+pkgver="$pkgver"
+files(-,root,bin)
+*
