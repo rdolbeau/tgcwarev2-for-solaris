@@ -1,0 +1,11 @@
+--- gstreamer-1.0.3/gst/math-compat.h.orig	2012-10-25 11:54:57.000000000 +0100
++++ gstreamer-1.0.3/gst/math-compat.h	2015-11-03 15:35:13.425747000 +0000
+@@ -71,7 +71,7 @@
+ static inline float
+ __gst_math_compat_rintf (float x)
+ {
+-  return floorf (x + 0.5);
++  return (float)__gst_math_compat_rint((double)x);
+ }
+ 
+ static inline gboolean

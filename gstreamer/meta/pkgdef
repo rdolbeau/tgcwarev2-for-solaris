@@ -1,0 +1,9 @@
+[gstreamer]
+pkgname="${pkgprefix}${topdir}"
+name="gstreamer - http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.0.3.tar.xz"
+pkgcat="application"
+pkgvendor="http://gstreamer.freedesktop.org/"
+shortdesc="http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.0.3.tar.xz"
+pkgver="$pkgver"
+files(-,root,bin)
+*
