@@ -1,0 +1,32 @@
+--- gst-plugins-base-1.0.3/gst/tcp/Makefile.in.orig	2012-11-20 23:27:58.000000000 +0000
++++ gst-plugins-base-1.0.3/gst/tcp/Makefile.in	2015-11-04 07:59:29.880732000 +0000
+@@ -142,6 +142,7 @@
+ 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+ am__libgsttcp_la_SOURCES_DIST = gsttcpplugin.c gsttcpclientsrc.c \
+ 	gsttcpclientsink.c gstmultifdsink.c gstmultihandlesink.c \
++	fake-rfc2553.c	\
+ 	gstmultisocketsink.c gsttcpserversrc.c gsttcpserversink.c
+ @HAVE_SYS_SOCKET_H_TRUE@am__objects_1 =  \
+ @HAVE_SYS_SOCKET_H_TRUE@	libgsttcp_la-gstmultifdsink.lo
+@@ -510,6 +511,7 @@
+ 	gsttcpclientsrc.c gsttcpclientsink.c \
+ 	$(multifdsink_SOURCES) \
+ 	gstmultihandlesink.c  \
++	fake-rfc2553.c	\
+ 	gstmultisocketsink.c  \
+ 	gsttcpserversrc.c gsttcpserversink.c
+ 
+@@ -673,6 +675,13 @@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(libgsttcp_la_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgsttcp_la_CFLAGS) $(CFLAGS) -c -o libgsttcp_la-gstmultihandlesink.lo `test -f 'gstmultihandlesink.c' || echo '$(srcdir)/'`gstmultihandlesink.c
+ 
++libgsttcp_la-fake-rfc2553.lo: fake-rfc2553.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(libgsttcp_la_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS $(libgsttcp_la_CFLAGS) $(CFLAGS) -MT libgsttcp_la-fake-rfc2553.lo -MD -MP -MF $(DEPDIR)/libgsttcp_la-fake-rfc2553.Tpo -c -o libgsttcp_la-fake-rfc2553.lo `test -f 'fake-rfc2553.c' || echo '$(srcdir)/'`fake-rfc2553.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgsttcp_la-fake-rfc2553.Tpo $(DEPDIR)/libgsttcp_la-fake-rfc2553.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fake-rfc2553.c' object='libgsttcp_la-fake-rfc2553.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@@am__fastdepCC_FALSE@   $(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(libgsttcp_la_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgsttcp_la_CFLAGS) $(CFLAGS) -c -o libgsttcp_la-fake-rfc2553.lo `test -f 'fake-rfc2553.c' || echo '$(srcdir)/'`fake-rfc2553.c
++
++
+ libgsttcp_la-gstmultisocketsink.lo: gstmultisocketsink.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(libgsttcp_la_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgsttcp_la_CFLAGS) $(CFLAGS) -MT libgsttcp_la-gstmultisocketsink.lo -MD -MP -MF $(DEPDIR)/libgsttcp_la-gstmultisocketsink.Tpo -c -o libgsttcp_la-gstmultisocketsink.lo `test -f 'gstmultisocketsink.c' || echo '$(srcdir)/'`gstmultisocketsink.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgsttcp_la-gstmultisocketsink.Tpo $(DEPDIR)/libgsttcp_la-gstmultisocketsink.Plo

@@ -1,0 +1,9 @@
+[gst-plugins-base]
+pkgname="${pkgprefix}${topdir}"
+name="gst-plugins-base - http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.0.3.tar.xz"
+pkgcat="application"
+pkgvendor="http://gstreamer.freedesktop.org/"
+shortdesc="http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.0.3.tar.xz"
+pkgver="$pkgver"
+files(-,root,bin)
+*

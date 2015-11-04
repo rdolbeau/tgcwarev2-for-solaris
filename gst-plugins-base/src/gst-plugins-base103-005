@@ -1,0 +1,46 @@
+--- gst-plugins-base-1.0.3/sys/xvimage/xvimagesink.c.orig	2012-10-25 11:55:18.000000000 +0100
++++ gst-plugins-base-1.0.3/sys/xvimage/xvimagesink.c	2015-11-04 09:44:35.226662000 +0000
+@@ -126,9 +126,6 @@
+ /* Debugging category */
+ #include <gst/gstinfo.h>
+ 
+-/* for XkbKeycodeToKeysym */
+-#include <X11/XKBlib.h>
+-
+ GST_DEBUG_CATEGORY_EXTERN (gst_debug_xvimagesink);
+ GST_DEBUG_CATEGORY_EXTERN (GST_CAT_PERFORMANCE);
+ #define GST_CAT_DEFAULT gst_debug_xvimagesink
+@@ -754,8 +751,8 @@
+         /* Key pressed/released over our window. We send upstream
+            events for interactivity/navigation */
+         g_mutex_lock (&xvimagesink->x_lock);
+-        keysym = XkbKeycodeToKeysym (xvimagesink->xcontext->disp,
+-            e.xkey.keycode, 0, 0);
++        keysym = XKeycodeToKeysym (xvimagesink->xcontext->disp,
++            e.xkey.keycode, 0);
+         if (keysym != NoSymbol) {
+           key_str = XKeysymToString (keysym);
+         } else {
+--- gst-plugins-base-1.0.3/sys/ximage/ximagesink.c.orig	2012-10-25 11:55:18.000000000 +0100
++++ gst-plugins-base-1.0.3/sys/ximage/ximagesink.c	2015-11-04 09:44:45.876824000 +0000
+@@ -115,9 +115,6 @@
+ /* Debugging category */
+ #include <gst/gstinfo.h>
+ 
+-/* for XkbKeycodeToKeysym */
+-#include <X11/XKBlib.h>
+-
+ GST_DEBUG_CATEGORY_EXTERN (gst_debug_ximagesink);
+ GST_DEBUG_CATEGORY_EXTERN (GST_CAT_PERFORMANCE);
+ #define GST_CAT_DEFAULT gst_debug_ximagesink
+@@ -620,8 +617,8 @@
+         /* Key pressed/released over our window. We send upstream
+            events for interactivity/navigation */
+         g_mutex_lock (&ximagesink->x_lock);
+-        keysym = XkbKeycodeToKeysym (ximagesink->xcontext->disp,
+-            e.xkey.keycode, 0, 0);
++        keysym = XKeycodeToKeysym (ximagesink->xcontext->disp,
++            e.xkey.keycode, 0);
+         if (keysym != NoSymbol) {
+           key_str = XKeysymToString (keysym);
+         } else {
