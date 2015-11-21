@@ -1,0 +1,11 @@
+--- vala-0.30.0/build-aux/git-version-gen.orig	2010-08-15 12:49:03.000000000 +0100
++++ vala-0.30.0/build-aux/git-version-gen	2015-11-21 12:00:08.556420000 +0000
+@@ -135,7 +135,7 @@
+     *) # Append the suffix only if there isn't one already.
+ 	case $v in
+ 	  *-dirty) ;;
+-	  *) v="$v-dirty" ;;
++	  #*) v="$v-dirty" ;;
+ 	esac ;;
+ esac
+ 
