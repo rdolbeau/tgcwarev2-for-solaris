@@ -12,6 +12,7 @@ pkgver=1
 source[0]=ftp://ftp.sunet.se/pub/gnu/gmp/$topdir-$version.tar.xz
 # If there are no patches, simply comment this
 patch[0]=gmp-5.1.2-no-c99-trunc.patch
+patch[1]=gmp600-001
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions

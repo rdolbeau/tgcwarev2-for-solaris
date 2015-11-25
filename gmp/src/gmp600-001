@@ -1,0 +1,22 @@
+--- gmp-6.0.0/configure.orig	2015-11-17 14:10:57.192192000 +0000
++++ gmp-6.0.0/configure	2015-11-17 14:12:41.719285000 +0000
+@@ -4883,7 +4883,7 @@
+       ultrasparct[12345])
+         path="sparc32/ultrasparct1 sparc32/v8 sparc32" ;;
+       *)
+-        path="sparc32" ;;
++        path="sparc32/v8 sparc32" ;;
+     esac
+ 
+     # gcc 2.7.2 doesn't know about v9 and doesn't pass -xarch=v8plus to the
+@@ -4941,8 +4941,8 @@
+ 			gcc_32_cflags_asm="-Wa,-Av8plusd -Wa,-xarch=v8plusd"
+ 			gcc_64_cflags_asm="-Wa,-Av9d -Wa,-xarch=v9d";;
+       *)
+-			gcc_cflags_cpu="-mcpu=v7 -mcypress"
+-			gcc_cflags_asm="";;
++			gcc_cflags_cpu="-mcpu=v8 -mv8"
++			gcc_cflags_asm="-Wa,-Av8 -Wa,-xarch=v8";;
+     esac
+ 
+     # SunPRO cc and acc, and SunOS bundled cc
