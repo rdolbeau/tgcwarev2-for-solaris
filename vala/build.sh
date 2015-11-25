@@ -11,7 +11,7 @@ version=${baseversion}.0
 pkgver=1
 source[0]=ftp://ftp.gnome.org/pub/gnome/sources/${topdir}/${baseversion}/${topdir}-${version}.tar.xz
 # If there are no patches, simply comment this
-#patch[0]=
+patch[0]=vala0300-001
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
