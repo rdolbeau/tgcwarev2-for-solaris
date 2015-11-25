@@ -66,7 +66,12 @@ case "${build_arch}-${gnu_os_ver}" in
 	gcc_cpu="--with-cpu=$gcc_arch"
 	gmp_host="sparc-${vendor}-solaris${gnu_os_ver}"
 	;;
-    sparc-2.[89])
+    sparc-2.8)
+	gcc_arch=v8
+	gcc_cpu="--with-cpu=$gcc_arch"
+	gmp_host="sparc-${vendor}-solaris${gnu_os_ver}"
+	;;
+    sparc-2.9)
 	# When building gcc < 3.4 we'll use sparcv8 otherwise default to sparcv9
 	if [ $abbrev_majorminor -lt 34 -a $abbrev_majorminor -gt 0 ]; then
 	    gcc_arch=v8
@@ -100,7 +105,7 @@ case "${build_arch}-${gnu_os_ver}" in
 	;;
 esac
 # gcc 4.7.x and later cannot be built for sparcv8 since libitm is v8+ only.
-[ $abbrev_majorminor -gt 46 -a "$build_arch" = "sparc" ] && gcc_cpu="--with-cpu=v9"
+#[ $abbrev_majorminor -gt 46 -a "$build_arch" = "sparc" ] && gcc_cpu="--with-cpu=v9"
 # For gcc > 4.3 and x86 set {arch,tune}-32 instead of {arch,tune}.
 [ $abbrev_majorminor -gt 43 -a "$vendor" = "pc" ] && gcc_cpu=$(echo $gcc_cpu | ${__sed} -e 's/arch=/arch-32=/;s/tune=/tune-32=/')
 # For gcc < 4.4 and x86_64, there is no arch-32 and setting arch conflicts with the 64bit support

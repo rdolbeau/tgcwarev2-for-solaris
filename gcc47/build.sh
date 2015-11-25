@@ -10,7 +10,8 @@ version=4.7.4
 pkgver=1
 source[0]=ftp://ftp.sunet.se/pub/gnu/gcc/releases/$topdir-$version/$topdir-$version.tar.bz2
 # If there are no patches, simply comment this
-#patch[0]=
+# v8 libitm
+patch[0]=gcc474-001
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
