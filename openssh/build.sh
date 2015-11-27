@@ -8,7 +8,7 @@
 topdir=openssh
 version=7.1p1
 pkgver=1
-source[0]=ftp://ftp.sunet.se/pub/OpenBSD/OpenSSH/portable/$topdir-$version.tar.gz
+source[0]=http://ftp.vim.org/security/OpenSSH/$topdir-$version.tar.gz
 # If there are no patches, simply comment this
 #patch[0]=
 

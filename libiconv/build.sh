@@ -8,7 +8,7 @@
 topdir=libiconv
 version=1.14
 pkgver=2
-source[0]=$topdir-$version.tar.gz
+source[0]=http://ftp.gnu.org/gnu/libiconv/$topdir-$version.tar.gz
 # If there are no patches, simply comment this
 #patch[0]=
 

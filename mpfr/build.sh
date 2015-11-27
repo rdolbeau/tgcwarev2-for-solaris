@@ -9,7 +9,8 @@ topdir=mpfr
 real_version=3.1.2
 version=${real_version}p11
 pkgver=1
-source[0]=http://www.mpfr.org/mpfr-current/$topdir-$real_version.tar.bz2
+#source[0]=http://www.mpfr.org/mpfr-current/$topdir-$real_version.tar.bz2
+source[0]=http://ftp.gnu.org/gnu/mpfr/$topdir-$real_version.tar.bz2
 # If there are no patches, simply comment this
 patch[0]=mpfr-3.1.2-allpatches-p1-p11.patch
 

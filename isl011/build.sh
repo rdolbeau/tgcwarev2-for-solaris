@@ -8,7 +8,7 @@
 topdir=isl
 version=0.11.2
 pkgver=1
-source[0]=ftp://ftp.linux.student.kuleuven.be/pub/people/skimo/$topdir/${topdir}-${version}.tar.bz2
+source[0]=http://isl.gforge.inria.fr/${topdir}-${version}.tar.bz2
 # If there are no patches, simply comment this
 #patch[0]=
 

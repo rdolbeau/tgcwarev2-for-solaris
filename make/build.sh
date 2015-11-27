@@ -8,7 +8,7 @@
 topdir=make
 version=3.82
 pkgver=2
-source[0]=$topdir-$version.tar.bz2
+source[0]=http://ftp.gnu.org/gnu/make/$topdir-$version.tar.bz2
 # If there are no patches, simply comment this
 #patch[0]=
 
