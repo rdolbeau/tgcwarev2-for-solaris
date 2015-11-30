@@ -1,0 +1,35 @@
+--- gcc-4.7.4/libitm/configure.tgt.orig	2012-02-13 21:51:44.000000000 +0000
++++ gcc-4.7.4/libitm/configure.tgt	2015-11-19 14:59:16.391222000 +0000
+@@ -71,9 +71,7 @@
+ 	  *" -m64 "*)
+ 	    ;;
+ 	  *)
+-	    if test -z "$with_cpu"; then
+-	      XCFLAGS="${XCFLAGS} -mcpu=v9"
+-	    fi
++	    ;;
+ 	esac
+ 	ARCH=sparc
+ 	;;
+--- gcc-4.7.4/libitm/config/sparc/sjlj.S.orig	2012-02-14 09:22:26.000000000 +0000
++++ gcc-4.7.4/libitm/config/sparc/sjlj.S	2015-11-19 15:00:59.768123000 +0000
+@@ -78,7 +78,7 @@
+ 	.proc	016
+ GTM_longjmp:
+ 	cfi_startproc
+-	flushw
++	ta 3
+ #if STACK_BIAS
+ 	load	[%o1 + OFFSET (JB_CFA)], %g1
+ 	sub	%g1, STACK_BIAS, %fp
+--- gcc-4.7.4/libitm/config/sparc/target.h.orig	2012-02-14 09:22:26.000000000 +0000
++++ gcc-4.7.4/libitm/config/sparc/target.h	2015-11-19 15:01:30.950199000 +0000
+@@ -40,7 +40,7 @@
+ static inline void
+ cpu_relax (void)
+ {
+-  __asm volatile ("rd %%ccr, %%g0" : : : "memory");
++  __asm volatile ("" : : : "memory");
+ }
+ 
+ } // namespace GTM
