@@ -6,14 +6,17 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=xrender
-version=0.8.3
+version=0.9.0
 pkgver=1
-source[0]=http://xlibs.freedesktop.org/release/$topdir-$version.tar.gz
+source[0]=http://xlibs.freedesktop.org/release/libXrender-$version.tar.gz
 # If there are no patches, simply comment this
 #patch[0]=
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
+
+
+topsrcdir=libXrender-$version
 
 export CFLAGS=-std=c89
 
