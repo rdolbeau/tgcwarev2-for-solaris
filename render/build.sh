@@ -6,14 +6,16 @@
 ###########################################################
 # Check the following 4 variables before running the script
 topdir=render
-version=0.8
+version=0.9
 pkgver=1
-source[0]=http://xlibs.freedesktop.org/release/$topdir-$version.tar.gz
+source[0]=http://xlibs.freedesktop.org/release/${topdir}ext-$version.tar.gz
 # If there are no patches, simply comment this
 #patch[0]=
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
+
+topsrcdir=${topdir}ext-$version
 
 reg prep
 prep()
