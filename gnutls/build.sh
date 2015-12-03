@@ -19,6 +19,10 @@ case "${build_arch}-${gnu_os_ver}" in
         #/dev/random
         patch[0]=gnutls330-001
         ;;
+    sparc-2.8)
+	#missing IPV6_V6ONLY
+	patch[0]=gnutls330-002
+	;;
     *)
         ;;
 esac
