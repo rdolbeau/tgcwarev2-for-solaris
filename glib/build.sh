@@ -12,12 +12,19 @@ pkgver=1
 source[0]=http://ftp.gnome.org/pub/gnome/sources/${topdir}/${baseversion}/${topdir}-${version}.tar.xz
 # If there are no patches, simply comment this
 #patch[0]=glib2461-001
-#hack support for IPV6
-patch[0]=glib2382-001
-patch[1]=glib2382-002
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
+
+#hack support for IPV6 for 7
+case "${build_arch}-${gnu_os_ver}" in
+    sparc-2.7)
+        patch[0]=glib2382-001
+        patch[1]=glib2382-002
+        ;;
+    *)
+        ;;
+esac
 
 configure_args+=(--with-libiconv=gnu --with-xml-catalog=/usr/tgcware/etc/xml/catalog.xml)
 
