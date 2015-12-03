@@ -10,10 +10,18 @@ version=1.6.4
 pkgver=1
 source[0]=https://gnupg.org/ftp/gcrypt/libgcrypt/${topdir}-${version}.tar.bz2
 # If there are no patches, simply comment this
-patch[0]=libgcrypt164-001
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
+
+case "${build_arch}-${gnu_os_ver}" in
+    sparc-2.7)
+        #/dev/random
+        patch[0]=libgcrypt164-001
+        ;;
+    *)
+        ;;
+esac
 
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib"

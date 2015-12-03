@@ -10,11 +10,18 @@ version=3.3.0
 pkgver=2
 source[0]=ftp://ftp.gnutls.org/gcrypt/gnutls/v3.3/${topdir}-${version}.tar.xz
 # If there are no patches, simply comment this
-#/dev/random
-patch[0]=gnutls330-001
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
+
+case "${build_arch}-${gnu_os_ver}" in
+    sparc-2.7)
+        #/dev/random
+        patch[0]=gnutls330-001
+        ;;
+    *)
+        ;;
+esac
 
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib -lrt"
