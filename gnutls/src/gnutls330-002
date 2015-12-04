@@ -1,0 +1,11 @@
+--- gnutls-3.3.0/src/serv.c.orig	2014-04-09 22:07:34.000000000 +0100
++++ gnutls-3.3.0/src/serv.c	2015-12-03 12:27:51.776889000 +0000
+@@ -759,7 +759,7 @@
+ 			continue;
+ 		}
+ 		s = news; /* to not overwrite existing s from previous loops */
+-#if defined(HAVE_IPV6) && !defined(_WIN32)
++#if 0 && defined(HAVE_IPV6) && !defined(_WIN32)
+ 		if (ptr->ai_family == AF_INET6) {
+ 			yes = 1;
+ 			/* avoid listen on ipv6 addresses failing

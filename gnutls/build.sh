@@ -22,6 +22,8 @@ case "${build_arch}-${gnu_os_ver}" in
     sparc-2.8)
 	#missing IPV6_V6ONLY
 	patch[0]=gnutls330-002
+	#error with gets vs. std::gets
+	patch[1]=gnutls330-003
 	;;
     *)
         ;;
