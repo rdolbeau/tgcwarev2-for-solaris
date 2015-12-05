@@ -1,0 +1,11 @@
+--- libgpg-error-1.20/src/gen-posix-lock-obj.c.orig	2015-06-15 08:49:45.000000000 +0100
++++ libgpg-error-1.20/src/gen-posix-lock-obj.c	2015-12-05 13:59:31.256215000 +0000
+@@ -109,7 +109,7 @@
+           "  union {\n"
+           "    volatile char _priv[%d];\n"
+           "%s"
+-          "    long _x_align;\n"
++          "    long long _x_align;\n"
+           "    long *_xp_align;\n"
+           "  } u;\n"
+           "} gpgrt_lock_t;\n"
