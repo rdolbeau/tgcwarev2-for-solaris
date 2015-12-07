@@ -11,11 +11,19 @@ version=${baseversion}.3
 pkgver=1
 source[0]=http://ftp.gnome.org/pub/gnome/sources/${topdir}/${baseversion}/$topdir-$version.tar.xz
 # If there are no patches, simply comment this
-#no MAP_ANON
-patch[0]=libsecret0183-001
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
+
+#hack support for IPV6 for 7
+case "${build_arch}-${gnu_os_ver}" in
+    sparc-2.7)
+	#no MAP_ANON
+	patch[0]=libsecret0183-001
+        ;;
+    *)
+        ;;
+esac
 
 configure_args+=(--enable-introspection=no)
 
