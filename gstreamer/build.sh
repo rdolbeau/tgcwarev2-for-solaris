@@ -12,6 +12,7 @@ source[0]=http://${topdir}.freedesktop.org/src/${topdir}/${topdir}-${version}.ta
 # If there are no patches, simply comment this
 # missing floorf
 patch[0]=gstreamer103-001
+patch[1]=gstreamer103-002
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions

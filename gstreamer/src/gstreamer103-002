@@ -1,0 +1,17 @@
+--- gstreamer-1.0.3/common/extract-release-date-from-doap-file.orig	2012-10-25 11:59:00.000000000 +0100
++++ gstreamer-1.0.3/common/extract-release-date-from-doap-file	2015-12-16 14:39:54.300584000 +0000
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/usr/tgcware/bin/bash
+ # Shell script to extract the date given a release version and a .doap file
+ 
+ if test "x$1" = "x" -o "x$2" = "x" -o ! -s "$2"; then
+@@ -16,7 +16,7 @@
+   exit 1
+ fi
+ 
+-awk 'BEGIN {x=0}
++gawk 'BEGIN {x=0}
+ {
+ if ($0~"<release>") {x=1; chunk=""}
+ if (x==1) {
