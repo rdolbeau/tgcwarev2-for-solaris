@@ -1,0 +1,114 @@
+Only in gcc-4.7.4-back/gcc: ChangeLog.orig
+diff -ur gcc-4.7.4/gcc/config.gcc gcc-4.7.4-back/gcc/config.gcc
+--- gcc-4.7.4/gcc/config.gcc	2013-10-03 02:52:23.000000000 +0200
++++ gcc-4.7.4-back/gcc/config.gcc	2015-11-30 16:07:30.158077958 +0100
+@@ -264,6 +264,7 @@
+  | mips*-*-openbsd*			\
+  | picochip-*				\
+  | score-*				\
++ | *-*-solaris2.7*                      \
+  | *-*-solaris2.8*			\
+  )
+     if test "x$enable_obsolete" != xyes; then
+@@ -295,8 +296,8 @@
+  | *-*-rtemsaout*			\
+  | *-*-rtemscoff*			\
+  | *-*-solaris2				\
+- | *-*-solaris2.[0-7]			\
+- | *-*-solaris2.[0-7].*			\
++ | *-*-solaris2.[0-6]			\
++ | *-*-solaris2.[0-6].*			\
+  | *-*-sysv*		\
+  | vax-*-vms*				\
+  )
+Only in gcc-4.7.4-back/gcc: config.gcc.orig
+Only in gcc-4.7.4-back/gcc: configure.ac.orig
+diff -ur gcc-4.7.4/gcc/doc/install.texi gcc-4.7.4-back/gcc/doc/install.texi
+--- gcc-4.7.4/gcc/doc/install.texi	2013-01-14 17:32:37.000000000 +0100
++++ gcc-4.7.4-back/gcc/doc/install.texi	2015-11-30 15:58:06.216559412 +0100
+@@ -3111,6 +3111,8 @@
+ @item
+ @uref{#sparc-sun-solaris2,,sparc-sun-solaris2*}
+ @item
++@uref{#sparc-sun-solaris27,,sparc-sun-solaris2.7}
++@item
+ @uref{#sparc-sun-solaris210,,sparc-sun-solaris2.10}
+ @item
+ @uref{#sparc-x-linux,,sparc-*-linux*}
+@@ -4310,7 +4312,8 @@
+ @option{-fpermissive}; it will assume that any missing type is @code{int}
+ (as defined by C90).
+ 
+-There are patches for Solaris 8 (108652-24 or newer for SPARC,
++There are patches for Solaris 7 (108376-21 or newer for SPARC,
++108377-20 for Intel), and Solaris 8 (108652-24 or newer for SPARC,
+ 108653-22 for Intel) that fix this bug.
+ 
+ Sun bug 4927647 sometimes causes random spurious testsuite failures
+Only in gcc-4.7.4-back/gcc/doc: install.texi.orig
+Only in gcc-4.7.4-back/gcc/testsuite: ChangeLog.orig
+diff -ur gcc-4.7.4/gcc/testsuite/gcc.dg/c99-stdint-6.c gcc-4.7.4-back/gcc/testsuite/gcc.dg/c99-stdint-6.c
+--- gcc-4.7.4/gcc/testsuite/gcc.dg/c99-stdint-6.c	2010-04-12 21:01:36.000000000 +0200
++++ gcc-4.7.4-back/gcc/testsuite/gcc.dg/c99-stdint-6.c	2015-11-30 15:58:06.220559223 +0100
+@@ -2,7 +2,7 @@
+    with any system <inttypes.h> header.  */
+ /* { dg-do compile { target inttypes_types } } */
+ /* { dg-options "-std=iso9899:1999 -pedantic-errors" } */
+-/* { dg-options "-std=gnu99 -pedantic-errors -DNO_FAST_TYPES" { target *-*-solaris2.[89]* } } */
++/* { dg-options "-std=gnu99 -pedantic-errors -DNO_FAST_TYPES" { target *-*-solaris2.[789]* } } */
+ /* { dg-options "-std=gnu99 -pedantic-errors -DNO_LEAST_TYPES -DNO_FAST_TYPES -DNO_MAX_TYPES" { target alpha*-dec-osf5* } } */
+ 
+ #include <inttypes.h>
+diff -ur gcc-4.7.4/gcc/testsuite/g++.dg/warn/miss-format-1.C gcc-4.7.4-back/gcc/testsuite/g++.dg/warn/miss-format-1.C
+--- gcc-4.7.4/gcc/testsuite/g++.dg/warn/miss-format-1.C	2010-11-10 18:48:42.000000000 +0100
++++ gcc-4.7.4-back/gcc/testsuite/g++.dg/warn/miss-format-1.C	2015-11-30 16:06:25.117132467 +0100
+@@ -23,7 +23,7 @@
+ {
+   va_list ap;
+   va_start (ap, fmt);
+-  vscanf (fmt, ap); /* { dg-warning "candidate" "scanf attribute warning" { xfail *-*-solaris2.8 *-*-vxworks* alpha*-dec-osf* } } */
++  vscanf (fmt, ap); /* { dg-warning "candidate" "scanf attribute warning" { xfail *-*-solaris2.[78] *-*-vxworks* alpha*-dec-osf* } } */
+   va_end (ap);
+ }
+ 
+Only in gcc-4.7.4-back/gcc/testsuite/g++.dg/warn: miss-format-1.C.orig
+Only in gcc-4.7.4-back/libstdc++-v3: ChangeLog.orig
+diff -ur gcc-4.7.4/libstdc++-v3/configure gcc-4.7.4-back/libstdc++-v3/configure
+--- gcc-4.7.4/libstdc++-v3/configure	2012-11-06 00:42:32.000000000 +0100
++++ gcc-4.7.4-back/libstdc++-v3/configure	2015-11-30 15:58:06.248557910 +0100
+@@ -63747,7 +63747,7 @@
+     ;;
+   *-solaris*)
+     case "$target" in
+-      *-solaris2.8 | *-solaris2.9 | *-solaris2.10)
++      *-solaris2.7 | *-solaris2.8 | *-solaris2.9 | *-solaris2.10)
+ 
+   # If we're not using GNU ld, then there's no point in even trying these
+   # tests.  Check for that first.  We should have already tested for gld
+diff -ur gcc-4.7.4/libstdc++-v3/configure.host gcc-4.7.4-back/libstdc++-v3/configure.host
+--- gcc-4.7.4/libstdc++-v3/configure.host	2012-12-18 15:27:14.000000000 +0100
++++ gcc-4.7.4-back/libstdc++-v3/configure.host	2015-11-30 15:58:33.791264720 +0100
+@@ -296,7 +296,7 @@
+     echo "Please specify the full version of Solaris, ie. solaris2.9 " 1>&2
+     exit 1
+     ;;
+-  solaris2.[89] | solaris2.1[0-9])
++  solaris2.[789] | solaris2.1[0-9])
+     os_include_dir="os/solaris/solaris2.8"
+     ;;
+   tpf)
+Only in gcc-4.7.4-back/libstdc++-v3: configure.host.orig
+Only in gcc-4.7.4-back/libstdc++-v3: configure.orig
+diff -ur gcc-4.7.4/libstdc++-v3/crossconfig.m4 gcc-4.7.4-back/libstdc++-v3/crossconfig.m4
+--- gcc-4.7.4/libstdc++-v3/crossconfig.m4	2011-07-18 13:04:18.000000000 +0200
++++ gcc-4.7.4-back/libstdc++-v3/crossconfig.m4	2015-11-30 15:58:06.256557535 +0100
+@@ -198,7 +198,7 @@
+     ;;
+   *-solaris*)
+     case "$target" in
+-      *-solaris2.8 | *-solaris2.9 | *-solaris2.10)
++      *-solaris2.7 | *-solaris2.8 | *-solaris2.9 | *-solaris2.10)
+          GLIBCXX_CHECK_LINKER_FEATURES
+          AC_DEFINE(HAVE_MBSTATE_T)
+          AC_DEFINE(HAVE_FINITE)
+Only in gcc-4.7.4-back/libstdc++-v3: crossconfig.m4.orig

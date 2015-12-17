@@ -1,0 +1,11 @@
+--- gcc-4.7.4/libgo/runtime/go-trampoline.c.orig	2012-05-25 22:51:45.000000000 +0100
++++ gcc-4.7.4/libgo/runtime/go-trampoline.c	2015-12-03 23:06:18.458137000 +0000
+@@ -80,7 +80,7 @@
+       {
+ 	int i;
+ 
+-	i = mprotect (page, page_size, PROT_READ | PROT_WRITE | PROT_EXEC);
++	i = mprotect ((caddr_t)page, page_size, PROT_READ | PROT_WRITE | PROT_EXEC);
+ 	__go_assert (i == 0);
+       }
+ #endif

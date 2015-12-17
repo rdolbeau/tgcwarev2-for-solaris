@@ -10,7 +10,7 @@ version=4.7.4
 pkgver=1
 source[0]=ftp://ftp.sunet.se/pub/gnu/gcc/releases/$topdir-$version/$topdir-$version.tar.bz2
 # If there are no patches, simply comment this
-# v8 libitm
+# v7/8 libitm
 patch[0]=gcc474-001
 
 # Source function library
@@ -18,6 +18,23 @@ patch[0]=gcc474-001
 
 # Common settings for gcc
 . ${BUILDPKG_BASE}/gcc/build.sh.gcc.common
+
+echo "we are ${build_arch}-${gnu_os_ver}"
+case "${build_arch}-${gnu_os_ver}" in
+    sparc-2.7)
+        patch[1]=gcc474-sol7-001
+#	patch[2]=gcc474-sol7-002
+	patch[2]=gcc474-sol7-003
+	patch[3]=gcc474-sol7-004
+	configure_args+=(--disable-symvers --disable-tls)
+	export LDFLAGS="-L$prefix/lib -R$prefix/lib -lsparcatomic"
+	export LDFLAGS_FOR_TARGET="-L$prefix/lib -R$prefix/lib -lsparcatomic"
+        ;;
+    sparc-2.8)
+        ;;
+    *)
+        ;;
+esac
 
 # Global settings
 java_libver=13

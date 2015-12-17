@@ -1,0 +1,11 @@
+--- gcc-4.7.4/contrib/make_sunver.pl	2012-02-27 14:51:50.000000000 +0100
++++ gcc-4.7.4-back/contrib/make_sunver.pl	2015-12-01 13:13:06.804229652 +0100
+@@ -82,6 +82,8 @@
+ 	    $skip_arsym = 1;
+ 	    next;
+ 	}
++	# Ignore table header lines (Sol7)
++	next if (/^Symbol Table:/);
+ 
+ 	# Split table.
+ 	(undef, undef, undef, undef, $bind, $oth, undef, $shndx, $name) = split;

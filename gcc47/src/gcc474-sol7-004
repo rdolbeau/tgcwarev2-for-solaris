@@ -1,0 +1,10 @@
+--- gcc-4.7.4/libgo/configure.orig	2012-10-23 19:12:46.000000000 +0100
++++ gcc-4.7.4/libgo/configure	2015-12-04 16:51:41.995432000 +0000
+@@ -14946,6 +14946,7 @@
+ 
+ fi
+ 
++libgo_cv_lib_setcontext_clobbers_tls=no
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether setcontext clobbers TLS variables" >&5
+ $as_echo_n "checking whether setcontext clobbers TLS variables... " >&6; }
+ if test "${libgo_cv_lib_setcontext_clobbers_tls+set}" = set; then :
