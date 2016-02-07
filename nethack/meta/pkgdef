@@ -1,0 +1,11 @@
+[nethack]
+pkgname="${pkgprefix}${topdir}"
+name="nethack - Nethack is the game"
+pkgcat="application"
+pkgvendor="http://www.nethack.org"
+shortdesc="Nethack is the game"
+pkgver="$pkgver"
+files(-,root,bin)
+default_docs
+files(-,games,games)
+dir $gamesprefix

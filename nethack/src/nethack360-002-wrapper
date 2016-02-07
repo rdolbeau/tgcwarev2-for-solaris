@@ -1,0 +1,8 @@
+--- nethack-3.6.0/sys/unix/nethack.sh.orig	2015-06-12 07:32:45.000000000 +0100
++++ nethack-3.6.0/sys/unix/nethack.sh	2016-02-07 13:32:31.235080000 +0000
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/usr/tgcware/bin/bash
+ # NetHack 3.6  nethack.sh	$NHDT-Date: 1432512789 2015/05/25 00:13:09 $  $NHDT-Branch: master $:$NHDT-Revision: 1.17 $
+ 
+ HACKDIR=/usr/games/lib/nethackdir

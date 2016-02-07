@@ -1,0 +1,20 @@
+--- nethack-3.6.0/include/config.h.orig	2015-11-17 05:58:34.000000000 +0000
++++ nethack-3.6.0/include/config.h	2016-02-06 15:28:26.039490000 +0000
+@@ -43,7 +43,7 @@
+ #if !defined(NOTTYGRAPHICS)
+ #define TTY_GRAPHICS /* good old tty based graphics */
+ #endif
+-/* #define X11_GRAPHICS */   /* X11 interface */
++#define X11_GRAPHICS   /* X11 interface */
+ /* #define QT_GRAPHICS */    /* Qt interface */
+ /* #define GNOME_GRAPHICS */ /* Gnome interface */
+ /* #define MSWIN_GRAPHICS */ /* Windows NT, CE, Graphics */
+@@ -125,7 +125,7 @@
+  * would allow:
+  *  xpmtoppm <x11tiles.xpm | pnmscale 1.25 | ppmquant 90 >x11tiles_big.xpm
+  */
+-/* # define USE_XPM */ /* Disable if you do not have the XPM library */
++# define USE_XPM /* Disable if you do not have the XPM library */
+ #ifdef USE_XPM
+ #define GRAPHIC_TOMBSTONE /* Use graphical tombstone (rip.xpm) */
+ #endif

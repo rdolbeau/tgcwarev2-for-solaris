@@ -1,0 +1,55 @@
+GROUPADD=/usr/sbin/groupadd
+USERADD=/usr/sbin/useradd
+GREP=/usr/bin/grep
+CUT=/usr/bin/cut
+CAT=/usr/bin/cat
+GAMESID=198
+
+# Attempt to create a group & user for nethack
+echo "Checking for nethack group `games'... \c"
+temp=`$GREP games /etc/group`
+if [ -n "$temp" ]; then
+    echo "yes"
+    gid=`echo $temp|$CUT -d: -f3`
+    if [ "$gid" != "$GAMESID" ]; then
+        echo "  Group games found but gid does not match with the preferred ($GAMESID)!"
+	echo "  This is not a critical error but please make sure this group"
+	echo "  is one you actually want to use for games."
+    fi
+else
+    echo "no"
+    echo "  Attempting to create games group (gid=$GAMESID)"
+    $GROUPADD -g $GAMESID games
+    gid=$GAMESID
+fi
+
+echo "Checking for nethack user `games'... \c"
+temp=`$GREP games /etc/passwd`
+if [ -n "$temp" ]; then
+    echo "yes"
+    uid=`echo $temp|$CUT -d: -f3`
+    ugid=`echo $temp|$CUT -d: -f4`
+    if [ "$uid" != "$GAMESID" ]; then
+        echo "  User games found but uid doesn't match with the preferred ($GAMESID)!"
+	echo "  This is not a critical error but please make sure this user"
+	echo "  is one you actually want to use for games."
+    fi
+    if [ "$ugid" != "$gid" ]; then
+        echo "  User games doesn't have group games!"
+	echo "  This is not a critical error but please make sure that the games user has"
+	echo "  a suitable group (preferably the games group.)"
+    fi
+    if [ "`echo $temp|$CUT -d: -f6`" != "/var/empty/games" ]; then
+	echo "  User games does not have homedir in /var/empty/games!"
+	echo "  This is a possible security risk so please make sure that"
+	echo "  user games has a homedir accessible only by root (perm 711)."
+    fi
+    if [ "`echo $temp|$CUT -d: -f7`" != "/bin/false" ]; then
+	echo "  User games does not have /bin/false as its shell!"
+	echo "  Please verify that the games user has a non-login shell."
+    fi
+else
+    echo "no"
+    echo "  Attempting to create games user (uid=$GAMESID, gid=$GAMESID)"
+    $USERADD -u $GAMESID -g $GAMESID -c "games privsep" -d /var/empty/games -s /bin/false games
+fi
