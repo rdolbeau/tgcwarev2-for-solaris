@@ -12,13 +12,18 @@ source[0]=ftp://ftp.gnome.org/pub/gnome/sources/${topdir}/2.14/${topdir}-${versi
 # If there are no patches, simply comment this
 # obsolete stuff
 patch[0]=ORBit221419-001
-# if_nameindex, need a better fix
-patch[1]=ORBit221419-002
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
 
-#configure_args+=
+case "${build_arch}-${gnu_os_ver}" in
+    sparc-2.7)
+	# if_nameindex, need a better fix
+	patch[1]=ORBit221419-002
+        ;;
+    *)
+        ;;
+esac
 
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib"
