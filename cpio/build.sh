@@ -10,16 +10,15 @@ version=2.12
 pkgver=1
 source[0]=ftp://ftp.gnu.org/gnu/${topdir}/${topdir}-${version}.tar.gz
 # If there are no patches, simply comment this
-#patch[0]=
+patch[0]=src/cpio212-001-strtoumax
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
 
-#configure_args+=
-
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib"
 gnu_link cpio
+configure_args+=(--libexecdir=${prefix}/libexec-cpio)
 
 reg prep
 prep()
