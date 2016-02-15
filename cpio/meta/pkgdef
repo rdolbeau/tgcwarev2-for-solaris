@@ -1,0 +1,9 @@
+[cpio]
+pkgname="${pkgprefix}${topdir}"
+name="cpio - GNU cpio copies files into or out of a cpio or tar archive"
+pkgcat="application"
+pkgvendor="https://www.gnu.org/software/cpio/"
+shortdesc="GNU cpio copies files into or out of a cpio or tar archive"
+pkgver="$pkgver"
+files(-,root,bin)
+*

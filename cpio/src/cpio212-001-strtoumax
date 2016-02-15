@@ -1,0 +1,38 @@
+--- cpio-2.12/rmt/rmt.c.orig	2015-08-31 20:43:05.000000000 +0100
++++ cpio-2.12/rmt/rmt.c	2016-02-15 16:46:25.240276000 +0000
+@@ -440,7 +440,7 @@
+     }
+ 
+   str = rmt_read ();
+-  n = off = strtoumax (str, &p, 10);
++  n = off = strtoull (str, &p, 10);
+   if (*p)
+     {
+       rmt_error_message (EINVAL, N_("Invalid seek offset"));
+@@ -487,7 +487,7 @@
+   uintmax_t n;
+   size_t status;
+ 
+-  n = size = strtoumax (str, &p, 10);
++  n = size = strtoull (str, &p, 10);
+   if (*p)
+     {
+       rmt_error_message (EINVAL, N_("Invalid byte count"));
+@@ -538,7 +538,7 @@
+   uintmax_t n;
+   size_t status;
+ 
+-  n = size = strtoumax (str, &p, 10);
++  n = size = strtoull (str, &p, 10);
+   if (*p)
+     {
+       rmt_error_message (EINVAL, N_("Invalid byte count"));
+@@ -602,7 +602,7 @@
+       return;
+     }
+   str = rmt_read ();
+-  n = count = strtoumax (str, &p, 10);
++  n = count = strtoull (str, &p, 10);
+   if (*p)
+     {
+       rmt_error_message (EINVAL, N_("Invalid byte count"));
