@@ -10,15 +10,28 @@ version=0.32.8
 pkgver=1
 source[0]=http://cairographics.org/releases/${topdir}-${version}.tar.gz
 # If there are no patches, simply comment this
-#remove MMAP test (we have mmap, but not MAP_ANON)
-patch[0]=pixman0328-001
-#libm doesn't have powf, only pow
-patch[1]=pixman0328-002
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
 
-configure_args+=(--with-libiconv=gnu)
+#hack support for IPV6 for 7
+case "${build_arch}-${gnu_os_ver}" in
+    sparc-2.7)
+	#remove MMAP test (we have mmap, but not MAP_ANON)
+        patch[0]=pixman0328-001
+	#libm doesn't have powf, only pow
+        patch[1]=pixman0328-002
+        ;;
+    sparc-2.8)
+	#libm doesn't have powf, only pow
+        patch[0]=pixman0328-002
+	patch[1]=pixman0328-003
+	;;
+    *)
+        ;;
+esac
+
+configure_args+=(--with-libiconv=gnu --disable-tls)
 
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib"
