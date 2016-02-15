@@ -10,12 +10,19 @@ version=1.8.20
 pkgver=1
 source[0]=http://${topdir}.freedesktop.org/releases/${topdir}/${topdir}-${version}.tar.gz
 # If there are no patches, simply comment this
-# missing ipv6
-patch[0]=dbus1820-001
-patch[1]=dbus1820-002
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
+
+case "${build_arch}-${gnu_os_ver}" in
+    sparc-2.7)
+	# missing ipv6
+	patch[0]=dbus1820-001
+	patch[1]=dbus1820-002
+        ;;
+    *)
+        ;;
+esac
 
 #configure_args+=
 
