@@ -10,7 +10,7 @@ version=2.3.2
 pkgver=1
 source[0]=http://xorg.freedesktop.org/releases/individual/lib/$topdir-$version.tar.gz
 # If there are no patches, simply comment this
-#patch[0]=
+patch[0]=libXft232-001
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
