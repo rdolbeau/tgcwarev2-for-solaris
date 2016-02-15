@@ -12,11 +12,20 @@ pkgver=1
 source[0]=http://ftp.gnome.org/pub/gnome/sources/${topdir}/${baseversion}/$topdir-$version.tar.xz
 # If there are no patches, simply comment this
 patch[0]=libsoup2531-001
-patch[1]=libsoup2531-002
-patch[2]=libsoup2531-003
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
+
+#hack support for IPV6 for 7
+case "${build_arch}-${gnu_os_ver}" in
+    sparc-2.7)
+	patch[1]=libsoup2531-002
+	patch[2]=libsoup2531-003
+        ;;
+    *)
+        ;;
+esac
+
 
 configure_args+=(--with-libiconv=gnu --enable-introspection=no --enable-vala=no)
 
