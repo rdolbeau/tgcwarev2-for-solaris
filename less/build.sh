@@ -18,6 +18,8 @@ source[0]=http://www.greenwoodsoftware.com/less/$topdir-$version.tar.gz
 # Global settings
 configure_args+=(--with-editor=/bin/vi)
 
+export LDFLAGS="-L$prefix/lib -R$prefix/lib"
+
 reg prep
 prep()
 {
