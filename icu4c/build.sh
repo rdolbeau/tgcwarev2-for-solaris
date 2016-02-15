@@ -12,9 +12,9 @@ pkgver=1
 source[0]=http://download.icu-project.org/files/icu4c/55.1/icu4c-55_1-src.tgz
 # If there are no patches, simply comment this
 #-std=gnu99 allows to compile wchar.h
-patch[0]=src/icu4c551-001
-#UINTPTR_MAX is defined but empty in Sol7
-patch[1]=src/icu4c551-002
+patch[0]=icu4c551-001
+#UINTPTR_MAX is defined but empty in Sol7 & Sol8
+patch[1]=icu4c551-002
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
