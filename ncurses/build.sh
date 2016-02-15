@@ -8,7 +8,7 @@
 topdir=ncurses
 version=5.6
 pkgver=1
-source[0]=$topdir-$version.tar.gz
+source[0]=http://ftp.gnu.org/gnu/$topdir/$topdir-$version.tar.gz
 # If there are no patches, simply comment this
 #patch[0]=
 
