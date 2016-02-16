@@ -1,0 +1,11 @@
+--- gv-3.7.4/src/secscanf.c.orig	2012-03-29 17:03:50.000000000 +0100
++++ gv-3.7.4/src/secscanf.c	2016-02-16 15:26:32.654115000 +0000
+@@ -384,7 +384,7 @@
+ 	case 'g':
+ 	case 'e':
+ 	case 'E':
+-		vp->v_double = strtold(s, (char **) sp);
++		vp->v_double = strtod(s, (char **) sp);
+ 		break;
+ 	default:
+ 		return 0;
