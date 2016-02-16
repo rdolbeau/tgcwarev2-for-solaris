@@ -1,0 +1,9 @@
+[libpaper]
+pkgname="${pkgprefix}${topdir}"
+name="libpaper - libpaper provides a simple way for applications to take actions based on a system or user-specified paper size"
+pkgcat="application"
+pkgvendor="https://packages.debian.org/unstable/source/libpaper"
+shortdesc="libpaper provides a simple way for applications to take actions based on a system or user-specified paper size"
+pkgver="$pkgver"
+files(-,root,bin)
+*
