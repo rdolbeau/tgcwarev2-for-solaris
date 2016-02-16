@@ -1,0 +1,9 @@
+[gnu-ghostscript]
+pkgname="${pkgprefix}${topdir}"
+name="gnu-ghostscript - Ghostscript an interpreter for the PostScript language and for PDF"
+pkgcat="application"
+pkgvendor="http://www.ghostscript.com"
+shortdesc="Ghostscript an interpreter for the PostScript language and for PDF"
+pkgver="$pkgver"
+files(-,root,bin)
+*

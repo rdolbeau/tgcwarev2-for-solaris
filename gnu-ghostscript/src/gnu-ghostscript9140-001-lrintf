@@ -1,0 +1,25 @@
+--- gnu-ghostscript-9.14.0/openjpeg/libopenjpeg/opj_includes.h.orig	2014-07-02 16:13:25.000000000 +0100
++++ gnu-ghostscript-9.14.0/openjpeg/libopenjpeg/opj_includes.h	2016-02-16 12:31:44.224342000 +0000
+@@ -130,22 +130,9 @@
+ #endif
+ 
+ /* MSVC before 2013 and Borland C do not have lrintf */
+-#if defined(_MSC_VER) && (_MSC_VER < 1800) || defined(__BORLANDC__)
+ static INLINE long lrintf(float f){
+-#if defined(_M_X64) || defined(_M_ARM_FP)
+     return (long)((f>0.0f) ? (f + 0.5f):(f -0.5f));
+-#else
+-    int i;
+- 
+-    _asm{
+-        fld f
+-        fistp i
+-    };
+- 
+-    return i;
+-#endif
+ }
+-#endif
+ 
+ #include "opj_inttypes.h"
+ #include "opj_clock.h"
