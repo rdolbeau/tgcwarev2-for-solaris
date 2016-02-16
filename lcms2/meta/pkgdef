@@ -1,0 +1,9 @@
+[lcms2]
+pkgname="${pkgprefix}${topdir}"
+name="lcms2 - Little CMS intends to be an OPEN SOURCE small-footprint color management engine"
+pkgcat="application"
+pkgvendor="http://www.littlecms.com/"
+shortdesc="Little CMS intends to be an OPEN SOURCE small-footprint color management engine"
+pkgver="$pkgver"
+files(-,root,bin)
+*
