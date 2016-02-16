@@ -1,0 +1,34 @@
+--- Xaw3d/Imakefile.orig	2016-02-16 14:42:38.392534000 +0000
++++ Xaw3d/Imakefile	2016-02-16 14:44:33.714340000 +0000
+@@ -18,11 +18,10 @@
+ #define HasSharedData YES
+ #define LibName Xaw3d
+ #define SoRev SOXAWREV
+-#define IncSubdir X11
+-#define IncSubSubdir Xaw3d
++#define IncSubdir Xaw3d
+ 
+ XCOMM When building outside an X11 source tree:
+-XCOMM EXTRA_INCLUDES = -I.
++EXTRA_INCLUDES = -I.
+ 
+ #ifdef SharedXawReqs
+ REQUIREDLIBS = SharedXawReqs
+@@ -70,17 +69,10 @@
+ 
+ I18N_OBJS = MultiSrc.o MultiSink.o XawIm.o XawI18n.o
+ 
+-#ifdef XawI18nDefines
+-#define INTERNATIONALIZATION
+-HEADERS = $(BASE_HDRS) $(I18N_HDRS)
+-SRCS = $(BASE_SRCS) $(I18N_SRCS)
+-OBJS = $(BASE_OBJS) $(I18N_OBJS)
+-#else
+ #undef INTERNATIONALIZATION
+ HEADERS = $(BASE_HDRS)
+ SRCS = $(BASE_SRCS)
+ OBJS = $(BASE_OBJS)
+-#endif
+ 
+ #include <Library.tmpl>
+ 

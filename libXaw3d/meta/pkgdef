@@ -1,0 +1,9 @@
+[libXaw3d]
+pkgname="${pkgprefix}${topdir}"
+name="libXaw3d - libXaw3d library"
+pkgcat="application"
+pkgvendor="Unmaintained"
+shortdesc="libXaw3d library"
+pkgver="$pkgver"
+files(-,root,bin)
+*
