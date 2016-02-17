@@ -1,0 +1,9 @@
+[xpdf]
+pkgname="${pkgprefix}${topdir}"
+name="xpdf - Xpdf is an open source viewer for Portable Document Format (PDF) files"
+pkgcat="application"
+pkgvendor="http://www.foolabs.com/xpdf/"
+shortdesc="Xpdf is an open source viewer for Portable Document Format (PDF) files"
+pkgver="$pkgver"
+files(-,root,bin)
+*
