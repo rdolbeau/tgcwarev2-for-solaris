@@ -1,0 +1,9 @@
+[fltk]
+pkgname="${pkgprefix}${topdir}"
+name="fltk - FLTK is a cross-platform C++ GUI toolkit"
+pkgcat="application"
+pkgvendor="http://www.fltk.org"
+shortdesc="FLTK is a cross-platform C++ GUI toolkit"
+pkgver="$pkgver"
+files(-,root,bin)
+*
