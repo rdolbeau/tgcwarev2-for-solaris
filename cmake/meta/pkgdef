@@ -1,0 +1,9 @@
+[cmake]
+pkgname="${pkgprefix}${topdir}"
+name="cmake - CMake is an open-source, cross-platform family of tools designed to build, test and package software"
+pkgcat="application"
+pkgvendor="https://cmake.org/"
+shortdesc="CMake is an open-source, cross-platform family of tools designed to build, test and package software"
+pkgver="$pkgver"
+files(-,root,bin)
+*
