@@ -13,11 +13,22 @@ source[0]=http://gstreamer.freedesktop.org/src/${topdir}/${topdir}-${version}.ta
 #BSD ioctls
 patch[0]=gst-plugins-base103-001
 #rfc2553
-patch[1]=gst-plugins-base103-002
-patch[2]=gst-plugins-base103-003
-patch[3]=gst-plugins-base103-004
+case "${build_arch}-${gnu_os_ver}" in
+    sparc-2.7)
+	patch[1]=gst-plugins-base103-002
+	patch[2]=gst-plugins-base103-003
+	patch[3]=gst-plugins-base103-004
+        ;;
+    *)
+	patch[1]=""
+        patch[2]=""
+        patch[3]=""
+        ;;
+esac
 #no xkb
 patch[4]=gst-plugins-base103-005
+#shell issues
+patch[5]=gst-plugins-base103-006
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions

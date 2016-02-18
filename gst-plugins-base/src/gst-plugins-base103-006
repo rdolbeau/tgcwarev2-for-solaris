@@ -1,0 +1,17 @@
+--- gst-plugins-base-1.0.3/common/extract-release-date-from-doap-file.orig	2012-10-25 12:22:33.000000000 +0100
++++ gst-plugins-base-1.0.3/common/extract-release-date-from-doap-file	2016-02-17 12:45:52.049884000 +0000
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/usr/tgcware/bin/bash
+ # Shell script to extract the date given a release version and a .doap file
+ 
+ if test "x$1" = "x" -o "x$2" = "x" -o ! -s "$2"; then
+@@ -16,7 +16,7 @@
+   exit 1
+ fi
+ 
+-awk 'BEGIN {x=0}
++gawk 'BEGIN {x=0}
+ {
+ if ($0~"<release>") {x=1; chunk=""}
+ if (x==1) {
