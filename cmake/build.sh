@@ -17,8 +17,7 @@ source[0]=https://${topdir}.org/files/v2.8/${topdir}-${version}.tar.gz
 
 #configure_args+=
 
-PARA=`psrinfo | tail -1 | awk '{ print $1 }'`
-PARA=$((PARA+1))
+PARA=`psrinfo | wc -l | awk '{ print $1 }'`
 
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib"
