@@ -10,18 +10,10 @@ version=1.20
 pkgver=2
 source[0]=ftp://ftp.gnupg.org/gcrypt/libgpg-error/$topdir-$version.tar.bz2
 # If there are no patches, simply comment this
-#patch[0]=
+patch[0]=libgpg-error120-001-lockalign
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
-
-case "${build_arch}-${gnu_os_ver}" in
-    sparc-2.8)
-	patch[0]=libgpg-error120-001-lockalign
-	;;
-    *)
-	;;
-esac
 
 # Global settings
 export CPPFLAGS="-I$prefix/include"
