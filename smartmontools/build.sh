@@ -8,23 +8,24 @@
 topdir=smartmontools
 version=6.4
 pkgver=1
-source[0]=http://freefr.dl.sourceforge.net/project/${topdir}/${topdir}/${version}/${topdir}-${version}.tar.gz
+source[0]=http://downloads.sourceforge.net/$topdir/$topdir-$version.tar.gz
 # If there are no patches, simply comment this
-patch[0]=smartmontools64-001
-patch[1]=smartmontools64-002
+patch[0]=smartmontools-6.4-cxx-fix.patch
 
 # Source function library
 . ${BUILDPKG_SCRIPTS}/buildpkg.functions
 
-export CFLAGS="-std=c99"
+# Global settings
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib"
-configure_args+=(--with-working-snprintf=no)
+ac_overrides="ac_cv_func_regcomp=no"
+configure_args+=(--docdir=$prefix/$_vdocdir --with-initscriptdir=$prefix/$_vdocdir --with-working-snprintf=no)
 
 reg prep
 prep()
 {
     generic_prep
+    setdir source
 }
 
 reg build
@@ -43,7 +44,8 @@ reg install
 install()
 {
     generic_install DESTDIR
-    doc COPYING AUTHORS NEWS
+    ${__mv} ${stagedir}${prefix}/${_vdocdir}/smartd ${stagedir}${prefix}/${_vdocdir}/smartd.init
+    ${__rm} -f ${stagedir}${prefix}/${_sysconfdir}/smartd.conf
 }
 
 reg pack

@@ -5,10 +5,10 @@
 #
 ###########################################################
 # Check the following 4 variables before running the script
-topdir=curl
-version=7.47.1
+topdir=libssh2
+version=1.6.0
 pkgver=1
-source[0]=http://curl.haxx.se/download/$topdir-$version.tar.bz2
+source[0]=http://www.libssh2.org/download/$topdir-$version.tar.gz
 # If there are no patches, simply comment this
 #patch[0]=
 
@@ -18,8 +18,7 @@ source[0]=http://curl.haxx.se/download/$topdir-$version.tar.bz2
 # Global settings
 export CPPFLAGS="-I$prefix/include"
 export LDFLAGS="-L$prefix/lib -R$prefix/lib"
-
-configure_args+=(--enable-static=no --enable-http --enable-ftp --enable-file --disable-ldap --enable-manual --enable-cookies --enable-crypto --with-libidn --with-libssh2)
+configure_args+=(--disable-examples-build --disable-static)
 
 reg prep
 prep()
@@ -43,22 +42,7 @@ reg install
 install()
 {
     generic_install DESTDIR
-    doc CHANGES COPYING README* RELEASE-NOTES docs/FAQ docs/FEATURES docs/BUGS \
-      docs/MANUAL docs/RESOURCES docs/TODO docs/TheArtOfHttpScripting \
-      docs/examples/*.c docs/examples/Makefile.example docs/INTERNALS \
-      docs/CONTRIBUTE
-
-    compat curl 7.29.0 1 1
-    compat curl 7.30.0 1 1
-    compat curl 7.33.0 1 1
-    compat curl 7.35.0 1 1
-    compat curl 7.36.0 1 1
-    compat curl 7.38.0 1 1
-    compat curl 7.41.0 1 1
-    compat curl 7.42.0 1 1
-    compat curl 7.42.1 1 1
-    compat curl 7.44.1 1 1
-    compat curl 7.46.0 1 1
+    doc NEWS README RELEASE-NOTES
 }
 
 reg pack
